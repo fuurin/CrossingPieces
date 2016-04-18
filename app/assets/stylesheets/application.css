@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ 
+ /*
 body{
 	color:	#2CA6E0;
 }
@@ -59,3 +61,4 @@ input[type="submit"]{
 	background-color:	#FFFFFF;
 	border-style:	none;
 }
+*/
