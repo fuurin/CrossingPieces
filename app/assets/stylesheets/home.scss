@@ -1,3 +1,84 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+//
+// Declare Variables
+//
+
+$light_blue: #2CA6E0;
+$yellow: #F7B52C;
+$gray_strong: #717071;
+$gray_weak: #C8C9CA;
+
+
+
+//
+// Declare Functions
+//
+
+hover {
+	&:hover{
+		color:	$yellow;
+	}
+}
+
+
+//
+// Declare whole tag
+//
+
+body{
+	color:	$light_blue;
+}
+
+header {
+	background-color: $light_blue;
+}
+
+a{
+	@extend hover;
+	color:	$light_blue;
+}
+
+
+
+//
+// Declare layout of contents
+//
+
+// Centering contents
+.content{
+	text-align: center;
+}
+
+// Form
+table {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+
+//
+// Declare particular contents design
+//
+
+// Image Logo
+img.header_icon {
+		width:	15%;
+		height:	15%;
+		padding-top: 1%;
+		padding-bottom: 1%;
+		background-color: $light_blue;
+}
+
+// Submit button design
+input[type="submit"] {
+	@extend hover;
+	font-weight:	bold;
+	font-size:	1.5em;
+	background-color:	white;
+	border-style:	none;
+}
