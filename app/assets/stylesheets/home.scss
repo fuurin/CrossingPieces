@@ -39,9 +39,12 @@ h2 {
 //
 
 // Table
-table.login {
+table.center {
 	text-align: center;
 	margin: 0 auto;
+	th {
+		padding-right: 10px;
+	}
 }
 
 
@@ -57,9 +60,8 @@ img.header_icon {
 		margin: 1%;
 }
 
+// Login and Registrataion Button design
 .actions {
-	// Submit button design
-
 	.actions-design {
 		@extend hover;
 		font-weight:	bold;
@@ -81,3 +83,21 @@ img.header_icon {
 	}
 }
 
+// Error explanation in devise
+#error_explanation {
+	h2 {
+		@extend .alert;
+		@extend .alert-danger;
+		margin-top: 0;
+	}
+
+	ul {
+		@extend .alert;
+		@extend .alert-danger;
+		list-style: none;
+	}
+}
+
+.field_with_errors {
+	display: inline;
+}
