@@ -1,0 +1,32 @@
+= render "devise/shared/header"
+
+%h2.text-center= t "page_title.user_sign_up"
+
+.container.text-center
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = devise_error_messages!
+
+    .field
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: true
+
+    .field
+      = f.label :password
+      - if @minimum_password_length
+        %em
+          (#{@minimum_password_length}
+          = f.label :minimum_password_length
+          )
+      %br/
+      = f.password_field :password, autocomplete: "off"
+
+    .field
+      = f.label :password_confirmation
+      %br/
+      = f.password_field :password_confirmation, autocomplete: "off"
+
+    .actions
+      = f.submit
+
+  = render "devise/shared/links"
