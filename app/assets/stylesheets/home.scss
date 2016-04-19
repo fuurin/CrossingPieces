@@ -3,32 +3,19 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 //
-// Declare Variables
+// Import partial files
 //
+@import "bootstrap";
+@import "color";
+@import "function";
 
-$light_blue: #2CA6E0;
-$yellow: #F7B52C;
-$gray_strong: #717071;
-$gray_weak: #C8C9CA;
-
-
-
-//
-// Declare Functions
-//
-
-hover {
-	&:hover{
-		color:	$yellow;
-	}
-}
 
 
 //
 // Declare whole tag
 //
 
-body{
+body {
 	color:	$light_blue;
 }
 
@@ -36,9 +23,13 @@ header {
 	background-color: $light_blue;
 }
 
-a{
+a {
 	@extend hover;
 	color:	$light_blue;
+}
+
+h2 {
+	margin: 20px auto;
 }
 
 
@@ -47,16 +38,10 @@ a{
 // Declare layout of contents
 //
 
-// Centering contents
-.content{
+// Table
+table.login {
 	text-align: center;
-}
-
-// Form
-table {
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0 auto;
 }
 
 
@@ -69,16 +54,30 @@ table {
 img.header_icon {
 		width:	15%;
 		height:	15%;
-		padding-top: 1%;
-		padding-bottom: 1%;
-		background-color: $light_blue;
+		margin: 1%;
 }
 
-// Submit button design
-input[type="submit"] {
-	@extend hover;
-	font-weight:	bold;
-	font-size:	1.5em;
-	background-color:	white;
-	border-style:	none;
+.actions {
+	// Submit button design
+
+	.actions-design {
+		@extend hover;
+		font-weight:	bold;
+		font-size:	1.5em;
+		background-color:	white;
+		border-style:	none;
+		margin: 10px;
+	}
+
+	input[type="submit"] {
+		@extend .actions-design;
+	}
+
+	a {
+		@extend .actions-design;
+		&:hover {
+				text-decoration: none;
+		}
+	}
 }
+
