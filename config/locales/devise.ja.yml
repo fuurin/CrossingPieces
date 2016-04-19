@@ -18,7 +18,7 @@ ja:
       confirmation_instructions:
         subject: "アカウントの登録方法"
       reset_password_instructions:
-        subject: "パスワードの再設定"
+        subject: "パスワード再設定メール送信"
       unlock_instructions:
         subject: "アカウントのロック解除"
     omniauth_callbacks:
@@ -53,5 +53,5 @@ ja:
       not_found: "は見つかりませんでした。"
       not_locked: "ロックされていません。"
       not_saved:
-        one: "エラーにより、この %{resource} を保存できません："
-        other: "%{count} 個のエラーにより、この %{resource} を保存できません："
+        one: "エラーが発生しました。"
+        other: "%{count} 個のエラーが発生しました。"

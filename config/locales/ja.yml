@@ -140,6 +140,7 @@ ja:
       prompt: 選択してください
     submit:
       create: 登録する
+      login:  ログイン
       submit: 保存する
       update: 更新する
   number:
@@ -200,21 +201,21 @@ ja:
       long: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
       short: "%y/%m/%d %H:%M"
     pm: 午後
-
+  page_title:
+    login: 管理者ログイン
+    user_sign_up: ユーザ登録
+    pasword_reset: パスワード再設定
   activerecord:
     attributes:
       user:
         name: 名前
         age: 年齢
         password: パスワード
+        minimum_password_length: 文字以内
         password_confirmation: パスワード確認
         email: メールアドレス
-        minimum_password_length: 文字以内
-        login: ログイン
+        remember_me: メールアドレス・パスワードを保存する
         new_registration: 新規登録
         forgot_password?: パスワードを忘れた?
-        remember_me: メールアドレス・パスワードを保存する
-
-  page_title:
-    user_sign_up: ユーザ登録
+        
   site_title: RyugakuHub
