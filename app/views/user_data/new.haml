@@ -1,15 +1,14 @@
 = render "devise/shared/header"
 
-%h2.text-center= t "page_title.user_sign_up"
+%h2.text-center= t "page_title.user_datum_sign_up"
 
 .container.text-center
-  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    = devise_error_messages!
+  = form_for [@user, @user.user_data.build] do |f|
 
     %table
       %tr
-        %th= f.label :email
-        %td= f.email_field :email, autofocus: true
+        %th= f.label :name
+        %td= f.text_field :name, autofocus: true
 
       %tr
         %th
@@ -29,3 +28,4 @@
       = f.submit 
       
   = render "devise/shared/links"
+ 

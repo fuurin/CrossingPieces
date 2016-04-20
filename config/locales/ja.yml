@@ -204,6 +204,7 @@ ja:
   page_title:
     login: 管理者ログイン
     user_sign_up: ユーザ登録
+    user_datum_sign_up: ユーザデータ登録
     pasword_reset: パスワード再設定
   activerecord:
     attributes:
