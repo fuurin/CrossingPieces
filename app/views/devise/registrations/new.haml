@@ -8,22 +8,45 @@
 
     %table
       %tr
-        %th= f.label :email
-        %td= f.email_field :email, autofocus: true
+        .field
+          %th= f.label :email
+          %td= f.email_field :email, autofocus: true
 
       %tr
-        %th
-          = f.label :password
-          - if @minimum_password_length
-            %em
-              (#{@minimum_password_length}
-              = f.label :minimum_password_length
-              )
-        %td= f.password_field :password, autocomplete: "off"
+        .field
+          %th
+            = f.label :password
+            - if @minimum_password_length
+              %em
+                (#{@minimum_password_length}
+                = f.label :minimum_password_length
+                )
+          %td= f.password_field :password, autocomplete: "off"
 
       %tr
-        %th= f.label :password_confirmation
-        %td= f.password_field :password_confirmation, autocomplete: "off"
+        .field
+          %th= f.label :password_confirmation
+          %td= f.password_field :password_confirmation, autocomplete: "off"
+
+      %tr
+        .field
+          %th= f.label :name
+          %td= f.text_field("name")
+
+      %tr
+        .field
+          %th= f.label :comment
+          %td= f.text_area("comment")
+
+      %tr
+        .field
+          %th= f.label :country_region
+          %td= f.text_field("country_region")
+
+      %tr
+        .field
+          %th= f.label :photo
+          %td= f.file_field("photo")
 
     .actions= f.submit 
       

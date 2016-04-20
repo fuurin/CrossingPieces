@@ -38,13 +38,16 @@ a {
 .my_container {
 	@extend .container;
 	@extend .text-center;
-	width: 40%;
+	width: 50%;
 	margin-top: 30px;
 	border-style: dashed;
 }
 
 // Table
 table {
+	$input_width: 340px;
+	$textarea_height: 70px;
+
 	text-align: center;
 	margin: 0 auto;
 	border-collapse: separate;
@@ -52,6 +55,13 @@ table {
 	th {
 		line-height: center;
 		padding-right: 10px;
+	}
+	input {
+		width: $input_width;
+	}
+	textarea {
+		width: $input_width;
+		height: $textarea_height;
 	}
 }
 

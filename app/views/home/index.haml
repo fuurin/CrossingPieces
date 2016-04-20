@@ -10,5 +10,15 @@
 	%p
 		Email: 
 		= current_user.email
+
+	%p
+		Nick Name: 
+		= current_user.name
+
+	%p
+		Picture:
+		=# image_tag(url_for(:action => 'get_image', :id => @user.id), :size => '100x100')
+		
+	%p= link_to "Destroy", user_path(current_user.id), :method => :delete
 	
 	%p= link_to "Sign out", destroy_user_session_path, :method => :delete
