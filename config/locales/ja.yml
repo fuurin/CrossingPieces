@@ -212,7 +212,7 @@ ja:
         name: 名前
         age: 年齢
         password: パスワード
-        minimum_password_length: 文字以内
+        minimum_password_length: 文字以上
         password_confirmation: パスワード確認
         email: メールアドレス
         remember_me: メールアドレス・パスワードを保存する

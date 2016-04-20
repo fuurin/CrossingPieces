@@ -1,8 +1,8 @@
 = render "devise/shared/header"
 
-%h2.text-center= t "page_title.pasword_reset"
+.my_container
+  %h2= t "page_title.pasword_reset"
 
-.container.text-center
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
     = devise_error_messages!
 

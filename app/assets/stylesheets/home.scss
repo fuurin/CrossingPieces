@@ -34,6 +34,15 @@ a {
 // Declare layout of contents
 //
 
+// Container
+.my_container {
+	@extend .container;
+	@extend .text-center;
+	width: 40%;
+	margin-top: 30px;
+	border-style: dashed;
+}
+
 // Table
 table {
 	text-align: center;
@@ -41,6 +50,7 @@ table {
 	border-collapse: separate;
 	border-spacing: 1.5em;
 	th {
+		line-height: center;
 		padding-right: 10px;
 	}
 }
