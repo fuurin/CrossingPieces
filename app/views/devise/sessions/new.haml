@@ -4,9 +4,8 @@
   %h2= t "page_title.login"
   
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    
     - flash.each do |key, value|
-      = content_tag(:div, value, class: "#{key} alert-danger")
+      = content_tag(:div, value, class: "notice alert-danger")
     
     %table
       %tr
