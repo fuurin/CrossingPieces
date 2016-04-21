@@ -34,7 +34,6 @@ a {
 // Declare layout of contents
 //
 
-// Container
 .my_container {
 	@extend .container;
 	@extend .text-center;
@@ -44,8 +43,7 @@ a {
 	border-style: dashed;
 }
 
-// Table
-table {
+form table {
 	$input_width: 340px;
 	$textarea_height: 70px;
 
@@ -70,13 +68,27 @@ table {
 	}
 }
 
+.home table {
+	margin: 20px auto;
+	.button_to {
+		input[type="submit"] {
+			@extend .btn;
+			@extend .btn-primary;
+			width: 200px;
+			height: 50px;
+			font-weight: bold;
+			font-size: 1.2em;
+			background-color: $light_blue;
+		}
+	}
+}
+
 
 
 //
 // Declare particular contents design
 //
 
-// Image Logo
 img.header_icon {
 		width:	15%;
 		height:	15%;
@@ -84,11 +96,10 @@ img.header_icon {
 }
 
 img.photo {
-	width: 100px;
-	height: 100px;
+	width: 50px;
+	height: 50px;
 }
 
-// Login and Registrataion Button design
 .actions {
 	.actions-design {
 		@extend hover;
@@ -111,7 +122,27 @@ img.photo {
 	}
 }
 
-// Error explanation in devise
+.button_to {
+	float: right;
+	margin: 15px 50px;
+	.sign_out_btn {
+		@extend .btn;
+		@extend .btn-default;
+		@extend hover;
+		font-weight:	bold;
+		font-size:	1.2em;
+		color: $light_blue;
+	}
+}
+
+span.is_login {
+	float: right;
+	margin: 20px 0;
+	color: white;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
 #error_explanation {
 	ul {
 		@extend .alert;

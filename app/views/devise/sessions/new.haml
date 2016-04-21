@@ -25,6 +25,6 @@
 
     .actions
       = f.submit t "helpers.submit.login"
-      = link_to t("activerecord.attributes.user.new_registration") , new_registration_path(resource_name)
+      = link_to t("form.new_registration") , new_registration_path(resource_name)
 
   = render "devise/shared/links"

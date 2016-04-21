@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
+  post 'home/index'
+
   get 'home/authentication'
 
   devise_for :users, :controllers => {

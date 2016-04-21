@@ -1,2 +1,9 @@
 %header
-  = image_tag("logo.png", :class => "header_icon")
+	= image_tag("logo.png", :class => "header_icon")
+
+	-if user_signed_in?
+		= button_to t("authentication.sign_out"), destroy_user_session_path, :method => :delete, :class => "sign_out_btn"
+		%span.is_login
+			= t "authentication.is_login"
+			= @user.name
+			= t "home.san"
