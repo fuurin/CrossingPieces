@@ -1,7 +1,7 @@
 = render "devise/shared/header"
 
 .my_container
-  %h2= t "page_title.pasword_reset"
+  %h1= t "page_title.pasword_reset"
 
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
     = devise_error_messages!

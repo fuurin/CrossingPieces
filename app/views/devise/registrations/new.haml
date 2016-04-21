@@ -1,7 +1,7 @@
 = render "devise/shared/header"
 
 .my_container
-  %h2=t "page_title.user_sign_up"
+  %h1=　t "page_title.user_sign_up"
   
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     = devise_error_messages!
