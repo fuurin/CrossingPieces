@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protected
  
   def configure_permitted_parameters
-  	permit_params = [:name, :comment, :country_region, :university_id, :photo]
+  	permit_params = [:name, :comment, :country_region, :university_id, :photo, :photo_content_type]
     devise_parameter_sanitizer.for(:sign_up) << permit_params
   end
 end

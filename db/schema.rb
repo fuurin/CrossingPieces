@@ -11,26 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420121451) do
+ActiveRecord::Schema.define(version: 20160421073421) do
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255,   default: "", null: false
-    t.string   "encrypted_password",     limit: 255,   default: "", null: false
+    t.string   "email",                  limit: 255,      default: "", null: false
+    t.string   "encrypted_password",     limit: 255,      default: "", null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,     default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,        default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-    t.string   "name",                   limit: 255
-    t.text     "comment",                limit: 65535
-    t.string   "country_region",         limit: 255
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+    t.string   "name",                   limit: 255,                   null: false
+    t.text     "comment",                limit: 65535,                 null: false
+    t.string   "country_region",         limit: 255,                   null: false
     t.integer  "university_id",          limit: 4
-    t.binary   "photo",                  limit: 65535
+    t.binary   "photo",                  limit: 16777215
+    t.string   "photo_content_type",     limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

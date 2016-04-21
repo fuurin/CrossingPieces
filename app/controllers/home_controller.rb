@@ -8,9 +8,4 @@ class HomeController < ApplicationController
 
   def authentication
   end
-
-  def get_image
-  	@user = User.find(current_user.id)
-  	send_data(@user.photo, :disposition => "inline", :type => "image/png")
-  end
 end
