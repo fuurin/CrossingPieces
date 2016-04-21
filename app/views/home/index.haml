@@ -1,24 +1,26 @@
-%h1 Home#index
+= render "devise/shared/header"
 
-%p= link_to "Sign in", new_user_session_path
-- if user_signed_in?
+%h1.text-center= t "page_title.user_home"
 	
-	%p
-		ID: 
-		= current_user.id
-	
-	%p
-		Email: 
-		= current_user.email
+%p
+	ID: 
+	= current_user.id
 
-	%p
-		Nick Name: 
-		= current_user.name
+%p
+	Email: 
+	= current_user.email
 
-	%p
-		Picture:
-		=image_tag get_photo_user_path(current_user.id), :size => "150x100"
-		
-	%p= link_to "Destroy", user_path(current_user.id), :method => :delete
+%p
+	Nick Name: 
+	= current_user.name
+
+%p
+	Picture:
+	- if !@user[:photo].nil?
+		=image_tag get_photo_user_path(current_user.id), :class => "photo"
+	- else
+		=image_tag "no-image.jpg", :class => "photo"
 	
-	%p= link_to "Sign out", destroy_user_session_path, :method => :delete
+%p= link_to "Destroy", user_path(current_user.id), :method => :delete
+
+%p= link_to "Sign out", destroy_user_session_path, :method => :delete

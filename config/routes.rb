@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   }
 
   resources :users, :controller => 'users/users' do
-    member {get :get_photo}
+    member { get :get_photo }
   end
   
   # The priority is based upon order of creation: first created -> highest priority.

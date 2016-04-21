@@ -40,6 +40,7 @@ a {
 	@extend .text-center;
 	width: 50%;
 	margin-top: 30px;
+	margin-bottom: 30px;
 	border-style: dashed;
 }
 
@@ -48,13 +49,17 @@ table {
 	$input_width: 340px;
 	$textarea_height: 70px;
 
-	text-align: center;
 	margin: 0 auto;
 	border-collapse: separate;
 	border-spacing: 1.5em;
 	th {
-		line-height: center;
-		padding-right: 10px;
+		display: inline;
+		float: left;
+		.mandatory {
+			display: inline;
+			color: $notice_red;
+			font-weight: bold;
+		}
 	}
 	input {
 		width: $input_width;
@@ -76,6 +81,11 @@ img.header_icon {
 		width:	15%;
 		height:	15%;
 		margin: 1%;
+}
+
+img.photo {
+	width: 100px;
+	height: 100px;
 }
 
 // Login and Registrataion Button design
@@ -114,4 +124,8 @@ img.header_icon {
 .notice {
 	@extend .alert;
 	margin: 1.5em 0 0;
+}
+
+.field_with_errors {
+	display: inline;
 }

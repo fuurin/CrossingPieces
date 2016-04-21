@@ -202,14 +202,17 @@ ja:
       short: "%y/%m/%d %H:%M"
     pm: 午後
   page_title:
-    login: 管理者ログイン
-    user_sign_up: ユーザ登録
-    user_datum_sign_up: ユーザデータ登録
+    login: 投稿者ログイン
+    user_home: 投稿者ホーム
+    user_sign_up: 投稿者登録
+    user_datum_sign_up: 投稿者データ登録
     pasword_reset: パスワード再設定
   activerecord:
     attributes:
       user:
-        name: 名前/ニックネーム(公開されます)
+        mandatory: (必須)
+        name: 名前またはニックネーム
+        name_public: (公開される名前です)
         age: 年齢
         password: パスワード
         comment: 自己紹介

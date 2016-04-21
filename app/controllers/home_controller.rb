@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-	before_action :authenticate_user!, only: :authentication
+	before_action :authenticate_user!
   def index
   	if user_signed_in?
   		@user = User.find(current_user.id)

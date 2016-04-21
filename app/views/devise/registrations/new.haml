@@ -8,39 +8,52 @@
 
     %table
       %tr
-        .field
-          %th= f.label :email
+        .field.form-inline
+          %th
+            = f.label :email
+            .mandatory= t "activerecord.attributes.user.mandatory"
           %td= f.email_field :email, autofocus: true
 
       %tr
         .field
           %th
             = f.label :password
+            .mandatory= t "activerecord.attributes.user.mandatory"
+            %br
             - if @minimum_password_length
-              %em
-                (#{@minimum_password_length}
-                = f.label :minimum_password_length
-                )
+              (#{@minimum_password_length}
+              = f.label :minimum_password_length
+              )
+
           %td= f.password_field :password, autocomplete: "off"
 
       %tr
         .field
-          %th= f.label :password_confirmation
+          %th
+            = f.label :password_confirmation
+            .mandatory= t "activerecord.attributes.user.mandatory"
           %td= f.password_field :password_confirmation, autocomplete: "off"
 
       %tr
         .field
-          %th= f.label :name
+          %th
+            = f.label :name
+            .mandatory= t "activerecord.attributes.user.mandatory"
+            = f.label :name_public
           %td= f.text_field("name")
 
       %tr
         .field
-          %th= f.label :comment
+          %th
+            = f.label :comment
+            .mandatory= t "activerecord.attributes.user.mandatory"
           %td= f.text_area("comment")
 
       %tr
         .field
-          %th= f.label :country_region
+          %th
+            = f.label :country_region
+            .mandatory= t "activerecord.attributes.user.mandatory"
           %td= f.text_field("country_region")
 
       %tr
