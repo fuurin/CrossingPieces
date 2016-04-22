@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 20160422005431) do
     t.string   "name_ja",             limit: 255,      null: false
     t.string   "recommended_point",   limit: 255,      null: false
     t.text     "comment",             limit: 65535,    null: false
-    t.integer  "created_by_id",       limit: 4,        null: false
+    t.integer  "created_by",          limit: 4,        null: false
     t.datetime "created_at",                           null: false
-    t.integer  "updated_by_id",       limit: 4,        null: false
+    t.integer  "updated_by",          limit: 4,        null: false
     t.datetime "updated_at",                           null: false
     t.binary   "photo1",              limit: 16777215
     t.string   "photo1_content_type", limit: 255

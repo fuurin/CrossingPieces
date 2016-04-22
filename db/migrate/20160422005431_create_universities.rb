@@ -5,9 +5,9 @@ class CreateUniversities < ActiveRecord::Migration
       t.string :name_ja, null: false, unique: true
       t.string :recommended_point, null: false
       t.text :comment, null: false
-      t.references :created_by, class_name: "User", null: false
+      t.integer :created_by, null: false
       t.datetime :created_at, null: false
-      t.references :updated_by, class_name: "User", null: false
+      t.integer :updated_by, null: false
       t.timestamps :updated_at, null: false
       t.binary :photo1, limit: 10.megabyte
       t.string :photo1_content_type

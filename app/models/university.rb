@@ -1,4 +1,5 @@
 class University < ActiveRecord::Base
-  belongs_to :created_by
-  belongs_to :updated_by
+  belongs_to :users
+
+  # DBの制約を、アプリケーション側でも、Modelの中でvalidatesとして行ってください。
 end
