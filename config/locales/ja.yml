@@ -207,6 +207,7 @@ ja:
     user_sign_up: 投稿者新規登録
     user_datum_sign_up: 投稿者データ登録
     pasword_reset: パスワード再設定
+    add_univ: 新規大学追加
   authentication:
     is_login: ログイン中： 
     sign_out: ログアウト
