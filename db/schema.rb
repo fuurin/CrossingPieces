@@ -11,26 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160422080402) do
+ActiveRecord::Schema.define(version: 20160423102711) do
 
   create_table "universities", force: :cascade do |t|
-    t.string   "name_en",             limit: 255,                     null: false
-    t.string   "name_ja",             limit: 255,                     null: false
-    t.string   "recommended_point",   limit: 255,                     null: false
-    t.text     "comment",             limit: 65535,                   null: false
-    t.integer  "created_by",          limit: 4,                       null: false
-    t.datetime "created_at",                                          null: false
-    t.integer  "updated_by",          limit: 4,                       null: false
-    t.datetime "updated_at",                                          null: false
-    t.binary   "photo1",              limit: 16777215
-    t.string   "photo1_content_type", limit: 255
-    t.binary   "photo2",              limit: 16777215
-    t.string   "photo2_content_type", limit: 255
-    t.binary   "photo3",              limit: 16777215
-    t.string   "photo3_content_type", limit: 255
-    t.decimal  "lat",                                  precision: 10
-    t.decimal  "lng",                                  precision: 10
-    t.integer  "zoom",                limit: 4
+    t.string   "name_en",           limit: 255,                  null: false
+    t.string   "name_ja",           limit: 255,                  null: false
+    t.string   "recommended_point", limit: 255,                  null: false
+    t.text     "comment",           limit: 65535,                null: false
+    t.integer  "created_by",        limit: 4,                    null: false
+    t.datetime "created_at",                                     null: false
+    t.integer  "updated_by",        limit: 4,                    null: false
+    t.datetime "updated_at",                                     null: false
+    t.decimal  "lat",                             precision: 10
+    t.decimal  "lng",                             precision: 10
+  end
+
+  create_table "university_photos", force: :cascade do |t|
+    t.integer "universities_id", limit: 4,     null: false
+    t.binary  "photo",           limit: 65535, null: false
+    t.string  "content_type",    limit: 255,   null: false
   end
 
   create_table "users", force: :cascade do |t|

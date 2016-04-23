@@ -236,5 +236,8 @@ ja:
         email: メールアドレス
         remember_me: メールアドレス・パスワードを保存する
         forgot_password?: パスワードを忘れた?
-        
+      university:
+        name: 大学名
+        recommended_point: おすすめポイント
+        comment: おすすめポイントの説明
   site_title: RyugakuHub

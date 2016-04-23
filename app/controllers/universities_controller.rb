@@ -3,6 +3,7 @@ class UniversitiesController < ApplicationController
 	before_action :find_user
 
 	def new
+		@university = University.new
 	end
 
 	# def create
