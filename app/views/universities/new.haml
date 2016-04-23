@@ -1,0 +1,41 @@
+= render "devise/shared/header"
+
+.my_container
+	%h1
+		-# テキストは、/config/locale/ja.ymlの内容を使います。
+		-# フォームなど、ラベルを使えるものは良いのですが、使えないものはこのようにtタグを使ってください。
+		= t "page_title.add_univ"
+
+	= form_for @university do |f|
+		%table
+			%tr
+			.field.form-inline
+				%th
+					= f.label :name_ja
+					.mandatory= t "form.mandatory"
+				%td= f.text_field :name_ja, autofocus: true
+			%tr
+			.field
+				%th
+					= f.label :name_en
+					.mandatory= t "form.mandatory"
+				%td= f.text_field :name_en, autofocus: true
+			%tr
+			.field
+				%th
+					= f.label :recommended_point
+					.mandatory= t "form.mandatory"
+				%td= f.text_field :name_en, autofocus: true
+			%tr
+			.field
+				%th
+					= f.label :comment
+					.mandatory= t "form.mandatory"
+				%td= f.text_area :name_en, autofocus: true
+
+
+
+		.actions= f.submit 
+
+	-# 以降のフォームを作ってください。
+	-# できればGoogleMapのところはcoffeescriptで作ってみてほしいな～なんて

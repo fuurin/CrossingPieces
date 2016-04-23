@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  recommended_point: MyString
+  comment: MyText
+  created_by_id: 
+  created_at: 2016-04-22
+  updated_by_id: 
+  updated_at: 2016-04-22
+  photo1: 
+  photo1_content_type: MyString
+  photo2: 
+  photo2_content_type: MyString
+  photo3: 
+  photo3_content_type: MyString
+
+two:
+  name: MyString
+  recommended_point: MyString
+  comment: MyText
+  created_by_id: 
+  created_at: 2016-04-22
+  updated_by_id: 
+  updated_at: 2016-04-22
+  photo1: 
+  photo1_content_type: MyString
+  photo2: 
+  photo2_content_type: MyString
+  photo3: 
+  photo3_content_type: MyString

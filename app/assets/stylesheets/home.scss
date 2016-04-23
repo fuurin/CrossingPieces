@@ -74,6 +74,7 @@ form table {
 		input[type="submit"] {
 			@extend .btn;
 			@extend .btn-primary;
+			@extend hover;
 			width: 200px;
 			height: 50px;
 			font-weight: bold;

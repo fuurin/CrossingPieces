@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_one :university
+
   validates :name, presence: true
   validates :comment, presence: true
   validates :country_region, presence: true

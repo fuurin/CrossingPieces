@@ -17,7 +17,7 @@
 		%table
 			%tr
 				%td= button_to t("home.author_info"), home_index_path(@user.id)
-				%td= button_to t("home.add_univ"), home_index_path(@user.id)
+				%td= button_to t("home.add_univ"), new_university_path, method: :get
 
 			%tr
 				%td= button_to t("home.new_article"), home_index_path(@user.id)
