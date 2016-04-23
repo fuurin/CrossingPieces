@@ -11,9 +11,28 @@
 			%tr
 			.field.form-inline
 				%th
-				= f.label :name_en
-				.mandatory= t "form.mandatory"
+					= f.label :name_ja
+					.mandatory= t "form.mandatory"
+				%td= f.text_field :name_ja, autofocus: true
+			%tr
+			.field
+				%th
+					= f.label :name_en
+					.mandatory= t "form.mandatory"
 				%td= f.text_field :name_en, autofocus: true
+			%tr
+			.field
+				%th
+					= f.label :recommended_point
+					.mandatory= t "form.mandatory"
+				%td= f.text_field :name_en, autofocus: true
+			%tr
+			.field
+				%th
+					= f.label :comment
+					.mandatory= t "form.mandatory"
+				%td= f.text_area :name_en, autofocus: true
+
 
 
 		.actions= f.submit 
