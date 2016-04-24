@@ -25,15 +25,17 @@
 				%th
 					= f.label :recommended_point
 					.mandatory= t "form.mandatory"
-				%td= f.text_field :name_en, autofocus: true
+				%td= f.text_field :recommended_point, autofocus: true
 			%tr
 			.field
 				%th
 					= f.label :comment
 					.mandatory= t "form.mandatory"
-				%td= f.text_area :name_en, autofocus: true
-
-
+				%td= f.text_area :comment, autofocus: true
+			= f.hidden_field :created_by, :value => current_user.id
+			= f.hidden_field :created_at, :value => '1000-01-01 00:00:00'
+			= f.hidden_field :updated_by, :value => current_user.id
+			= f.hidden_field :updated_at, :value => '1000-01-01 00:00:00'
 
 		.actions= f.submit 
 
