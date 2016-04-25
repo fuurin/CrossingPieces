@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  university_id: 
+  lat: 9.99
+  lng: 9.99
+
+two:
+  university_id: 
+  lat: 9.99
+  lng: 9.99
