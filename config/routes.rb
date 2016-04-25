@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   end
 
   resources :universities do
-    resources :university_photos
+    resources :university_photos, only: [:create, :destroy]
+    resources :university_map, only: [:create, :destroy]
   end
   
   # The priority is based upon order of creation: first created -> highest priority.
