@@ -1,15 +1,12 @@
 = render "devise/shared/header"
 
 .my_container
-	%h1
-		-# テキストは、/config/locale/ja.ymlの内容を使います。
-		-# フォームなど、ラベルを使えるものは良いのですが、使えないものはこのようにtタグを使ってください。
-		= t "page_title.add_univ"
+	%h1= t "page_title.add_univ"
 
 	= form_for @university do |f|
 		%table
 			%tr
-			.field.form-inline
+			.field
 				%th
 					= f.label :name_ja
 					.mandatory= t "form.mandatory"
@@ -19,27 +16,24 @@
 				%th
 					= f.label :name_en
 					.mandatory= t "form.mandatory"
-				%td= f.text_field :name_en, autofocus: true
+				%td= f.text_field :name_en
 			%tr
 			.field
 				%th
 					= f.label :recommended_point
 					.mandatory= t "form.mandatory"
-				%td= f.text_field :recommended_point, autofocus: true
+				%td= f.text_field :recommended_point
 			%tr
 			.field
 				%th
 					= f.label :comment
 					.mandatory= t "form.mandatory"
-				%td= f.text_area :comment, autofocus: true
-
-		- current_time = Time.zone.now
-		= f.hidden_field :created_by, :value => current_user.id
-		= f.hidden_field :created_at, :value => current_time
-		= f.hidden_field :updated_by, :value => current_user.id
-		= f.hidden_field :updated_at, :value => current_time
+				%td= f.text_area :comment
+			%tr
+			.field
+				%th
+					= f.label :photo
+				%td= f.file_field 'photos[0]'
+			%tr
 		
 		.actions= f.submit 
-
-	-# 以降のフォームを作ってください。
-	-# できればGoogleMapのところはcoffeescriptで作ってみてほしいな～なんて

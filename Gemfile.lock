@@ -38,10 +38,16 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.3)
     bcrypt (3.1.11-x64-mingw32)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (8.2.4)
+    choice (0.2.0)
+    coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -90,6 +96,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    method_source (0.8.2)
     mime-types (3.0)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0221)
@@ -100,6 +107,13 @@ GEM
     nokogiri (1.6.7.2-x64-mingw32)
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-byebug (3.3.0)
+      byebug (~> 8.0)
+      pry (~> 0.10)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -120,6 +134,11 @@ GEM
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
+    rails-erd (1.4.7)
+      activerecord (>= 3.2)
+      activesupport (>= 3.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
     railties (4.2.6)
@@ -132,6 +151,7 @@ GEM
       json (~> 1.4)
     responders (2.1.2)
       railties (>= 4.2.0, < 5.1)
+    ruby-graphviz (1.2.2)
     ruby_parser (3.8.1)
       sexp_processor (~> 4.1)
     sass (3.4.22)
@@ -145,6 +165,7 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.7.0)
+    slop (3.6.0)
     spring (1.7.1)
     sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
@@ -176,6 +197,8 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  better_errors
+  binding_of_caller
   byebug
   coffee-rails (~> 4.1.0)
   devise
@@ -185,7 +208,9 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mysql2 (>= 0.3.13, < 0.5)
+  pry-byebug
   rails (= 4.2.6)
+  rails-erd
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

@@ -24,5 +24,12 @@ module RyugakuHub
     config.active_record.raise_in_transactional_callbacks = true
 
     config.active_record.default_timezone = :local
+
+    if defined?(PryByebug)
+        Pry.commands.alias_command 'c', 'continue'
+        Pry.commands.alias_command 's', 'step'
+        Pry.commands.alias_command 'f', 'finish'
+        Pry.commands.alias_command 'n', 'next'
+    end
   end
 end

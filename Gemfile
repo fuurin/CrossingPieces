@@ -32,8 +32,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # For user authentication function
 gem 'devise'
 
-gem 'spring'
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -45,7 +43,12 @@ gem 'spring'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'spring'
   gem 'byebug'
+  gem 'pry-byebug'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'rails-erd'
 end
 
 group :development do
