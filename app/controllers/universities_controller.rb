@@ -6,6 +6,12 @@ class UniversitiesController < ApplicationController
 		@university = University.new
 	end
 
+	def create
+		@university = University.new(configure_permitted_parameters)
+		@university.save
+		redirect_to "/home/index"
+	end
+
 	# def create
 	# 	写真の登録前には、このようにコンテントタイプを保存し、readメソッドを通す必要があります。
  	# 	if params[:university][:photo1]
@@ -17,10 +23,9 @@ class UniversitiesController < ApplicationController
  	private
 
  	# DBに保存する前には、このようにパラメータをpermitしなければ保存されません。
- 	# def configure_permitted_parameters
-  # 	permit_params = [:name, :comment, :country_region, :university_id, :photo, :photo_content_type]
-  #   devise_parameter_sanitizer.for(:sign_up) << permit_params
-  # end
+ 	def configure_permitted_parameters
+  	params[:university].permit(:name_ja, :name_en, :recommended_point, :comment, :created_by, :created_at, :updated_by, :updated_at)
+  end
 
   def find_user
     @user = User.find(current_user.id)
