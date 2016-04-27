@@ -243,4 +243,6 @@ ja:
         recommended_point: おすすめポイント
         comment: おすすめポイントの説明
         photo: 写真
+      university_map:
+        map_input: 大学の場所　地図をクリックしてください
   site_title: RyugakuHub

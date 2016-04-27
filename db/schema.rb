@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160425172607) do
+ActiveRecord::Schema.define(version: 20160427163837) do
 
   create_table "universities", force: :cascade do |t|
     t.string   "name_en",           limit: 255,   null: false
@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(version: 20160425172607) do
 
   create_table "university_maps", force: :cascade do |t|
     t.integer "university_id", limit: 4,                null: false
-    t.decimal "lat",                     precision: 10, null: false
-    t.decimal "lng",                     precision: 10, null: false
+    t.decimal "lat",                     precision: 20, null: false
+    t.decimal "lng",                     precision: 20, null: false
+    t.integer "zoom",          limit: 2,                null: false
   end
 
   add_index "university_maps", ["university_id"], name: "fk_rails_f479d3627b", using: :btree

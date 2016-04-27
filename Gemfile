@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # For running rails on thin server to make it daemon
-#gem 'thin', '1.6.4'
+gem 'thin', '1.6.4'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 # execjs
@@ -18,11 +18,16 @@ gem 'haml-rails'
 gem 'erb2haml'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
+# Use sprockets-rails for asset pipeline?
+gem 'sprockets-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+# Use google maps as the rails gem
+gem 'gmaps4rails'
+# Use geocoder for google maps
+gem 'geocoder'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -31,6 +36,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # For user authentication function
 gem 'devise'
+# For multiple inserting to database
+gem 'activerecord-import'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

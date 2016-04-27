@@ -3,37 +3,38 @@
 .my_container
 	%h1= t "page_title.add_univ"
 
-	= form_for @university do |f|
+	= form_for University.new do |u|
 		%table
 			%tr
-			.field
 				%th
-					= f.label :name_ja
+					= u.label :name_ja
 					.mandatory= t "form.mandatory"
-				%td= f.text_field :name_ja, autofocus: true
-			%tr
-			.field
+				%td= u.text_field :name_ja, autofocus: true
+			%tr	
 				%th
-					= f.label :name_en
+					= u.label :name_en
 					.mandatory= t "form.mandatory"
-				%td= f.text_field :name_en
-			%tr
-			.field
+				%td= u.text_field :name_en
+			%tr	
 				%th
-					= f.label :recommended_point
+					= u.label :recommended_point
 					.mandatory= t "form.mandatory"
-				%td= f.text_field :recommended_point
+				%td= u.text_field :recommended_point
 			%tr
-			.field
 				%th
-					= f.label :comment
+					= u.label :comment
 					.mandatory= t "form.mandatory"
-				%td= f.text_area :comment
+				%td= u.text_area :comment
 			%tr
-			.field
 				%th
-					= f.label :photo
-				%td= f.file_field 'photos[0]'
-			%tr
-		
-		.actions= f.submit 
+					= u.label :photo
+				%td= u.file_field 'photos[1]'
+
+		= fields_for UniversityMap.new do |m|
+			= m.label :map_input
+			#map-input
+			= m.hidden_field :lat
+			= m.hidden_field :lng
+			= m.hidden_field :zoom, {:value => 0}
+
+		.actions= u.submit t("helpers.submit.create"), :disable_with => "wait"
