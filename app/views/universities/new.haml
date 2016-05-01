@@ -1,40 +1,53 @@
 = render "devise/shared/header"
 
+= javascript_include_tag 'university'
+
 .my_container
 	%h1= t "page_title.add_univ"
 
-	= form_for University.new do |u|
-		%table
+	- if @university.errors.any?
+		.alert.alert-danger.fade.in
+			%button.close(data-dismiss="alert" aria-label="close")
+				&times;
+			- @university.errors.messages.each_value do |message|
+				%p= message[0]
+
+	= form_for @university do |f|
+		%table.field
 			%tr
 				%th
-					= u.label :name_ja
+					= f.label :name_ja
 					.mandatory= t "form.mandatory"
-				%td= u.text_field :name_ja, autofocus: true
+				%td= f.text_field :name_ja, autofocus: true
 			%tr	
 				%th
-					= u.label :name_en
+					= f.label :name_en
 					.mandatory= t "form.mandatory"
-				%td= u.text_field :name_en
+				%td= f.text_field :name_en
 			%tr	
 				%th
-					= u.label :recommended_point
+					= f.label :recommended_point
 					.mandatory= t "form.mandatory"
-				%td= u.text_field :recommended_point
+				%td= f.text_field :recommended_point
 			%tr
 				%th
-					= u.label :comment
+					= f.label :comment
 					.mandatory= t "form.mandatory"
-				%td= u.text_area :comment
+				%td= f.text_area :comment
 			%tr
-				%th
-					= u.label :photo
-				%td= u.file_field 'photos[1]'
+				%th= f.label :photo1
+				%td= f.file_field 'photos[1]'
+			%tr
+				%th= f.label :photo2
+				%td= f.file_field 'photos[2]'
+			%tr
+				%th= f.label :photo3
+				%td= f.file_field 'photos[3]'
 
-		= fields_for UniversityMap.new do |m|
-			= m.label :map_input
-			#map-input
-			= m.hidden_field :lat
-			= m.hidden_field :lng
-			= m.hidden_field :zoom, {:value => 0}
+		= f.label :map_input
+		#map-input
+		= hidden_field :map, :lat
+		= hidden_field :map, :lng
+		= hidden_field :map, :zoom, {:value => 0}
 
-		.actions= u.submit t("helpers.submit.create"), :disable_with => "wait"
+		.actions= f.submit t("helpers.submit.create")

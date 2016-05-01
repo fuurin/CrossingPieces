@@ -218,6 +218,8 @@ ja:
     add_univ: 大学を追加
     new_article: 新規記事作成
     list_article: 記事の編集・削除
+    add_complete: を追加しました
+    photo_failed: の保存に失敗しました。ファイルを確認してください。
   form:
     mandatory: (必須)
     new_registration: 新規登録
@@ -242,7 +244,11 @@ ja:
         name_en: 大学名(英語)
         recommended_point: おすすめポイント
         comment: おすすめポイントの説明
-        photo: 写真
-      university_map:
+        remove_photo_button: 削除
+        photo1: 写真(1枚目)
+        photo2: 写真(2枚目)
+        photo3: 写真(3枚目)
+        remove: 削除
+        add_photo_button: 写真を追加
         map_input: 大学の場所　地図をクリックしてください
   site_title: RyugakuHub

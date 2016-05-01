@@ -3,65 +3,86 @@ class UniversitiesController < ApplicationController
 	before_action :find_user
 
 	def new
+		@university = University.new
 	end
 
 	def create
-		university = University.new(university_params)
-		register_creater university and register_updater university
-		if university.save && save_photos(university.id) && save_map(university.id)
-			redirect_to home_index_path
-		else render 'new' end
+		@university = University.new(university_params)
+		return render('new') unless @university.save
+		info = {name: @university.name_ja, photos_warning: save_photos(@university.id),
+			map_warning: save_map(@university.id)}
+		redirect_to home_index_path(university_created_info: info)
 	end
 
 	def edit
 	end
 
 	def destroy
+		# Destroy all at the same time
 	end
 
  	private
 
- 	def register_creater university
- 		university.created_by = current_user.id
- 		university.created_at = Time.zone.now
- 	end
-
- 	def register_updater university
- 		university.updated_by = current_user.id
- 		university.updated_at = Time.zone.now
- 	end
-
+ 	# For University
  	def university_params
-  	params[:university].permit :name_ja, :name_en, :recommended_point, :comment
+ 		register_creater params[:university]
+ 		register_updater params[:university]
+  	params[:university].permit :name_ja, :name_en, :recommended_point, :comment,
+  		:created_by, :created_at, :updated_by, :updated_at
   end
 
+ 	def register_creater university_params
+ 		university_params[:created_by] = current_user.id
+ 		university_params[:created_at] = Time.zone.now
+ 	end
+
+ 	def register_updater university_params
+ 		university_params[:updated_by] = current_user.id
+ 		university_params[:updated_at] = Time.zone.now
+ 	end
+
+
+
+ 	# For UniversityPhoto
   def photos_params
   	params[:university].require(:photos).permit!
   end
 
-  def map_params
-  	params[:university_map].permit :lat, :lng, :zoom
-  end
-
   def make_photo photo, id
-  	{:university_id => id, :photo => photo.read, :content_type => photo.content_type}
-  end
-
-  def make_map map, id
-  	{:university_id => id, :lat => map[:lat].to_f, :lng => map[:lng].to_f, :zoom => map[:zoom].to_i}
+  	{ :name => photo.original_filename, :photo => photo.read,
+  		:content_type => photo.content_type, :university_id => id } if photo.present?
   end
 
   def save_photos id
-  	photos = photos_params
-  	if photos.empty? then return end
-  	UniversityPhoto.import photos.map{|key, p| UniversityPhoto.new(make_photo(p, id))}
+  	return [] if params[:university][:photos].nil?
+  	photos = photos_params.map {|k, p| UniversityPhoto.new(make_photo(p, id))}
+  	UniversityPhoto.import(photos).failed_instances.map{|p| p[:name]}
 	end
 
+
+
+	# For UniversityMap
+	def map_params
+		map = params[:map]
+		map[:lat] = map[:lat].to_f if map[:lat] =~ /^[+-]?\d+\.?\d+$/
+		map[:lng] = map[:lng].to_f if map[:lng] =~ /^[+-]?\d+\.?\d+$/
+		map[:zoom] = map[:zoom].to_i if map[:zoom] =~ /^\d+$/
+  	map.permit :lat, :lng, :zoom
+  end
+
+  def make_map map, id
+  	{ :lat => map[:lat], :lng => map[:lng],
+  		:zoom => map[:zoom], :university_id => id}
+  end
+
 	def save_map id
-		map = map_params
-		if map[:lat].empty? or map[:lng].empty? then return end
-		UniversityMap.new(make_map(map, id)).save
+		return [] if params[:map][:lat].nil? or params[:map][:lng].nil?
+		university_map = UniversityMap.new make_map(map_params, id)
+		return [] if university_map.save
+		university_map.errors.messages.map{|key, message| message}.flatten
 	end
+
+
 
   def find_user
     @user = User.find(current_user.id)

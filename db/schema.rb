@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427163837) do
+ActiveRecord::Schema.define(version: 20160429144742) do
 
   create_table "universities", force: :cascade do |t|
     t.string   "name_en",           limit: 255,   null: false
@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(version: 20160427163837) do
   end
 
   create_table "university_maps", force: :cascade do |t|
-    t.integer "university_id", limit: 4,                null: false
-    t.decimal "lat",                     precision: 20, null: false
-    t.decimal "lng",                     precision: 20, null: false
-    t.integer "zoom",          limit: 2,                null: false
+    t.integer "university_id", limit: 4,                           null: false
+    t.decimal "lat",                     precision: 20, scale: 17, null: false
+    t.decimal "lng",                     precision: 20, scale: 17, null: false
+    t.integer "zoom",          limit: 2,                           null: false
   end
 
   add_index "university_maps", ["university_id"], name: "fk_rails_f479d3627b", using: :btree
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20160427163837) do
     t.integer "university_id", limit: 4,        null: false
     t.binary  "photo",         limit: 16777215, null: false
     t.string  "content_type",  limit: 255,      null: false
+    t.string  "name",          limit: 255
   end
 
   create_table "users", force: :cascade do |t|
