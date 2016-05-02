@@ -1,7 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
  
   def create
-  	if params[:user][:photo]
+  	unless params[:user][:photo].nil?
 	  	params[:user][:photo_content_type] = params[:user][:photo].content_type
 	    params[:user][:photo] = params[:user][:photo].read
 	  end

@@ -37,15 +37,15 @@ a {
 .my_container {
 	@extend .container;
 	@extend .text-center;
-	width: 50%;
+	width: 60%;
 	margin-top: 30px;
 	margin-bottom: 30px;
 	border-style: dashed;
 }
 
 form table {
-	$input_width: 340px;
-	$textarea_height: 70px;
+	$input_width: 400px;
+	$textarea_height: 100px;
 
 	margin: 0 auto;
 	border-collapse: separate;

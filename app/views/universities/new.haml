@@ -18,22 +18,22 @@
 				%th
 					= f.label :name_ja
 					.mandatory= t "form.mandatory"
-				%td= f.text_field :name_ja, autofocus: true
+				%td= f.text_field :name_ja, autofocus: true, placeholder: t("university.p_name_ja"), required: true
 			%tr	
 				%th
 					= f.label :name_en
 					.mandatory= t "form.mandatory"
-				%td= f.text_field :name_en
+				%td= f.text_field :name_en, placeholder: t("university.p_name_en"), required: true
 			%tr	
 				%th
 					= f.label :recommended_point
 					.mandatory= t "form.mandatory"
-				%td= f.text_field :recommended_point
+				%td= f.text_field :recommended_point, :placeholder => t("university.p_recommended_point"), required: true
 			%tr
 				%th
 					= f.label :comment
 					.mandatory= t "form.mandatory"
-				%td= f.text_area :comment
+				%td= f.text_area :comment, :placeholder => t("university.p_comment"), required: true
 			%tr
 				%th= f.label :photo1
 				%td= f.file_field 'photos[1]'
