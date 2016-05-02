@@ -1,7 +1,9 @@
 class University < ActiveRecord::Base
 	belongs_to :users
+	has_many :articles
 	has_many :university_photos
 	has_one :university_maps
+	
 	accepts_nested_attributes_for :university_photos, allow_destroy: true
 
 	validates :name_ja, presence: {message: "日本語の大学名を入力してください。"},

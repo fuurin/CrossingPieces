@@ -11,6 +11,6 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: {minimum: 8}
   validates :comment, presence: true
   validates :country_region, presence: true
-  validates :photo, length: {maximum: 10.megabytes, message: "画像ファイルの最大サイズは10メガバイトです。"}
+  validates :photo, length: {maximum: 5.megabytes, message: "画像ファイルの最大サイズは5メガバイトです。"}
   validates :photo_content_type, format: {with: /\A((image\/jpeg)|(image\/png)|(image\/gif))*\z/}
 end
