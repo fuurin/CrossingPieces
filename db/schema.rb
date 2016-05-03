@@ -11,55 +11,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502204247) do
+ActiveRecord::Schema.define(version: 20160503120705) do
 
   create_table "activity_articles", force: :cascade do |t|
-    t.integer "article_id",         limit: 4,        null: false
-    t.string  "period",             limit: 255
-    t.string  "expense",            limit: 255
-    t.string  "place",              limit: 255
-    t.text    "content",            limit: 65535
-    t.text    "impression",         limit: 65535
-    t.binary  "photo",              limit: 16777215
-    t.string  "photo_content_type", limit: 255
-    t.string  "name",               limit: 255
+    t.integer "article_id", limit: 4,     null: false
+    t.string  "period",     limit: 255
+    t.string  "expense",    limit: 255
+    t.string  "place",      limit: 255
+    t.text    "content",    limit: 65535
+    t.text    "impression", limit: 65535
+    t.string  "name",       limit: 255
   end
 
   add_index "activity_articles", ["article_id"], name: "fk_rails_ed3fc25987", using: :btree
 
   create_table "articles", force: :cascade do |t|
-    t.integer  "user_id",       limit: 4,   null: false
-    t.integer  "university_id", limit: 4,   null: false
-    t.string   "title",         limit: 255, null: false
-    t.string   "category",      limit: 255, null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "user_id",            limit: 4,        null: false
+    t.integer  "university_id",      limit: 4,        null: false
+    t.string   "title",              limit: 255,      null: false
+    t.string   "category",           limit: 255,      null: false
+    t.datetime "updated_at",                          null: false
+    t.binary   "photo",              limit: 16777215
+    t.string   "photo_content_type", limit: 255
   end
 
   add_index "articles", ["university_id"], name: "fk_rails_d8d008214d", using: :btree
   add_index "articles", ["user_id"], name: "fk_rails_3d31dad1cc", using: :btree
 
   create_table "lecture_articles", force: :cascade do |t|
-    t.integer "article_id",         limit: 4,        null: false
-    t.string  "credit",             limit: 255
-    t.string  "department",         limit: 255
-    t.string  "period",             limit: 255
-    t.text    "homework",           limit: 65535
-    t.text    "impression",         limit: 65535
-    t.text    "recommended_for",    limit: 65535
-    t.binary  "photo",              limit: 16777215
-    t.string  "photo_content_type", limit: 255
-    t.string  "name",               limit: 255
+    t.integer "article_id",      limit: 4,     null: false
+    t.string  "credit",          limit: 255
+    t.string  "department",      limit: 255
+    t.string  "period",          limit: 255
+    t.text    "homework",        limit: 65535
+    t.text    "impression",      limit: 65535
+    t.text    "recommended_for", limit: 65535
+    t.string  "name",            limit: 255
   end
 
   add_index "lecture_articles", ["article_id"], name: "fk_rails_f2166feacf", using: :btree
 
   create_table "shopping_articles", force: :cascade do |t|
-    t.integer "article_id",         limit: 4,        null: false
-    t.string  "name",               limit: 255
-    t.text    "merchandise",        limit: 65535
-    t.text    "comment",            limit: 65535
-    t.binary  "photo",              limit: 16777215
-    t.string  "photo_content_type", limit: 255
+    t.integer "article_id",  limit: 4,     null: false
+    t.string  "name",        limit: 255
+    t.text    "merchandise", limit: 65535
+    t.text    "comment",     limit: 65535
   end
 
   add_index "shopping_articles", ["article_id"], name: "fk_rails_a403fcc127", using: :btree
