@@ -1,5 +1,24 @@
-%h1 New article
+= render "devise/shared/header"
 
-= render 'form'
+.my_container
+	%h1= t "page_title.add_article"
 
-= link_to 'Back', articles_path
+	- if @article.errors.any?
+		.alert.alert-danger.fade.in
+			%button.close(data-dismiss="alert" aria-label="close")
+				&times;
+			- @article.errors.messages.each_value do |message|
+				%p= message[0]
+
+	%ul.nav.nav-tabs
+		%li.active
+			%a{href: "#lecture", "data-toggle" => "tab"}= t("article.lecture")
+		%li
+			%a{href: "#activity", "data-toggle" => "tab"}= t("article.activity")
+		%li
+			%a{href: "#shopping", "data-toggle" => "tab"}= t("article.shopping")
+
+	.tab-content
+		.tab-pane.active#lecture= render "articles/lecture_content"
+		.tab-pane#activity= render "articles/activity_content"
+		.tab-pane#shopping= render "articles/shopping_content"

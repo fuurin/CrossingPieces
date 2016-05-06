@@ -208,6 +208,7 @@ ja:
     user_datum_sign_up: 投稿者データ登録
     pasword_reset: パスワード再設定
     add_univ: 新規大学登録
+    add_article: 新規記事作成
   authentication:
     is_login: ログイン中： 
     sign_out: ログアウト
@@ -229,9 +230,24 @@ ja:
     p_country_region: ex. アメリカ/シリコンバレー
   university:
     p_name_ja: ex. 第1ジャパン大学
+    e_name_ja: 漢字、ひらがな、カタカナなどの全角文字を含まないでください。
     p_name_en: ex. 1st Japan University
+    e_name_en: 漢字、ひらがな、カタカナのいずれかを含めてください。
     p_recommended_point: ex. アットホームで熱意あふれる校風
     p_comment: ex. 誰もが自分の夢に向かって努力を続けています。学生がフレンドリーで、過ごしやすい学校です。あなたもこの学校で、未来への扉を開いてみませんか？
+  article:
+    lecture: 講義
+    activity: アクティビティ
+    shopping: ショッピング
+  lecture_article:
+    p_title: ex. 世界最大市場の歴史を紐解く講義
+    p_name: ex. アメリカ史 / the history of America
+    p_credit: ex. 7.5単位
+    p_department: ex. 経済学部 / Economics
+    p_period: ex. 2015年9月 ～ 2015年12月
+    p_homework: ex. アメリカの歴史に関するレポート作成、プレゼン準備
+    p_impression: ex. 慣れない英語で大変でしたが、何とかこう評価をもらうことができました。
+    p_recommended_for: ex. 将来アメリカで働きたいと思っている人、経済やその歴史に興味がある人
   form:
     mandatory: (必須)
     new_registration: 新規登録
@@ -258,10 +274,26 @@ ja:
         recommended_point: おすすめポイント
         comment: おすすめポイントの説明
         remove_photo_button: 削除
+        select_file: ファイルを選択
+        unselected_file: 選択されていません
         photo1: 写真(1枚目)
         photo2: 写真(2枚目)
         photo3: 写真(3枚目)
         remove: 削除
         add_photo_button: 写真を追加
         map_input: 大学の場所　地図をクリックしてください
+      article:
+        title: タイトル
+        photo: 写真
+      lecture_article:
+        university: 大学
+        name: 講義名
+        credit: 単位
+        department: 学部
+        period: 受講時期
+        homework: 課題
+        impression: 感想
+        recommended_for: こんな人におすすめ
+      activity_article:
+      shopping_article:
   site_title: RyugakuHub

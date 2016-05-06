@@ -1,0 +1,59 @@
+= form_for @article do |f|
+	%table.field
+		%tr
+			%th
+				= f.label :title
+				.mandatory= t "form.mandatory"
+			%td= f.text_field :title, required: true, autofocus: true, placeholder: t("lecture_article.p_title")
+
+		%tr
+			%th
+				= f.label :university
+				.mandatory= t "form.mandatory"
+			%td
+				= f.collection_select :university_id, University.all, :id, :name_en, required: true
+
+
+		= fields_for @lecture do |l|
+			%tr
+				%th
+					= l.label :name
+					.mandatory= t "form.mandatory"
+				%td= l.text_field :name, required: true, placeholder: t("lecture_article.p_name")
+			%tr
+				%th
+					= l.label :credit
+					.mandatory= t "form.mandatory"
+				%td= l.text_field :credit, required: true, placeholder: t("lecture_article.p_credit")
+			%tr	
+				%th
+					= l.label :department
+					.mandatory= t "form.mandatory"
+				%td= l.text_field :department, required: true, placeholder: t("lecture_article.p_department")
+			%tr
+				%th
+					= l.label :period
+					.mandatory= t "form.mandatory"
+				%td= l.text_field :period, required: true, placeholder: t("lecture_article.p_period")
+			%tr
+				%th
+					= l.label :homework
+					.mandatory= t "form.mandatory"
+				%td= l.text_field :homework, required: true, placeholder: t("lecture_article.p_homework")
+			%tr
+				%th
+					= l.label :impression
+					.mandatory= t "form.mandatory"
+				%td= l.text_area :impression, required: true, placeholder: t("lecture_article.p_impression")
+			%tr
+				%th
+					= l.label :recommended_for
+					.mandatory= t "form.mandatory"
+				%td= l.text_area :recommended_for, required: true, placeholder: t("lecture_article.p_recommended_for")
+		%tr
+			%th= f.label :photo
+			%td= f.file_field 'photo'
+
+	= f.hidden_field :category, value: "lecture"
+
+	.actions= f.submit t("helpers.submit.create")

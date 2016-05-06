@@ -5,16 +5,17 @@ class University < ActiveRecord::Base
 	has_one :university_maps
 	
 	accepts_nested_attributes_for :university_photos, allow_destroy: true
-
-	validates :name_ja, presence: {message: "日本語の大学名を入力してください。"},
-											uniqueness: {message: "その日本語の大学名は既に存在します。"},
-											format: {with: /.*[[ぁ-ん][ァ-ヴ][一-龠][亜-煕]]+.*/, 
-												message: "日本語の大学名は、漢字、ひらがな、カタカナを含めて入力してください。"}
+	accepts_nested_attributes_for :university_maps, allow_destroy: true
 
 	validates :name_en, presence: {message: "英語の大学名を入力してください。"},
 											uniqueness: {message: "その英語の大学名は既に存在します。"},
 											format: {without: /.*[[ぁ-ん][ァ-ヴ][一-龠][亜-煕][「」。、]]+.*/, 
-												message: "英語の大学名は、漢字、ひらがな、カタカナ等を含まないで入力してください。"}
+												message: "英語の大学名は、漢字、ひらがな、カタカナ等の全角文字を含まないで入力してください。"}
+
+	validates :name_ja, presence: {message: "日本語の大学名を入力してください。"},
+											uniqueness: {message: "その日本語の大学名は既に存在します。"},
+											format: {with: /.*[[ぁ-ん][ァ-ヴ][一-龠][亜-煕]]+.*/, 
+												message: "日本語の大学名は、漢字、ひらがな、カタカナのいずれかを含めて入力してください。"}
 
 	validates :recommended_point, presence: {message: "おすすめポイントを入力してください。"}
 	validates :comment, presence: {message: "おすすめポイントの説明を入力してください。"}

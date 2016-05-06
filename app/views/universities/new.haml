@@ -14,16 +14,16 @@
 
 	= form_for @university do |f|
 		%table.field
-			%tr
-				%th
-					= f.label :name_ja
-					.mandatory= t "form.mandatory"
-				%td= f.text_field :name_ja, autofocus: true, placeholder: t("university.p_name_ja"), required: true
 			%tr	
 				%th
 					= f.label :name_en
 					.mandatory= t "form.mandatory"
-				%td= f.text_field :name_en, placeholder: t("university.p_name_en"), required: true
+				%td= f.text_field :name_en, autofocus: true, placeholder: t("university.p_name_en"), required: true, pattern: "[\x20-\x7E]*", title: t("university.e_name_en")
+			%tr
+				%th
+					= f.label :name_ja
+					.mandatory= t "form.mandatory"
+				%td= f.text_field :name_ja, placeholder: t("university.p_name_ja"), required: true, pattern: ".*[^\x20-\x7E].*", title: t("university.e_name_ja")
 			%tr	
 				%th
 					= f.label :recommended_point

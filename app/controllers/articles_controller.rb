@@ -15,6 +15,9 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
+    @lecture = LectureArticle.new
+    @activity = ActivityArticle.new
+    @shopping = ShoppingArticle.new
   end
 
   # GET /articles/1/edit
@@ -24,17 +27,9 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
+    binding.pry
     @article = Article.new(article_params)
 
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render :show, status: :created, location: @article }
-      else
-        format.html { render :new }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /articles/1

@@ -27,7 +27,7 @@ class UniversitiesController < ApplicationController
  	def university_params
  		register_creater params[:university]
  		register_updater params[:university]
-  	params[:university].permit :name_ja, :name_en, :recommended_point, :comment,
+  	params[:university].permit :name_en, :name_ja, :recommended_point, :comment,
   		:created_by, :created_at, :updated_by, :updated_at
   end
 

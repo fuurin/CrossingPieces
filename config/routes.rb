@@ -17,16 +17,9 @@ Rails.application.routes.draw do
     member { get :get_photo }
   end
 
-  resources :universities do
-    resources :university_photos, only: [:create, :update, :destroy]
-    resources :university_map, only: [:create, :update, :destroy]
-  end
+  resources :universities
 
-  resources :articles do
-    resources :lecture_articles, only: [:create, :update, :destroy]
-    resources :activity_articles, only: [:create, :update, :destroy]
-    resources :shopping_articles, only: [:create, :update, :destroy]
-  end
+  resources :articles
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
