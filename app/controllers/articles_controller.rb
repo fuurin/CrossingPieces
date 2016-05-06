@@ -15,9 +15,6 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
-    @lecture = LectureArticle.new
-    @activity = ActivityArticle.new
-    @shopping = ShoppingArticle.new
   end
 
   # GET /articles/1/edit
