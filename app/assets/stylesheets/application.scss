@@ -1,0 +1,199 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+//
+// Import partial files
+//
+@import "bootstrap";
+@import "color";
+@import "function";
+
+
+
+//
+// Declare whole tag
+//
+
+body {
+	color:	$light_blue;
+	font-family: verdana, arial, helvetica, sans-serif;
+}
+
+a {
+	@extend hover;
+	color:	$light_blue;
+}
+
+$header_height: 60px;
+$img_vertical_margin: 10px;
+
+
+img.logo {
+	float: left;
+	width:	180px;
+	height:	$header_height - $img_vertical_margin * 2;
+	margin: $img_vertical_margin 15px;
+}
+
+header {
+	position: fixed;
+	background-color: $light_blue;
+	top: 0;
+	width: 100%;
+	height: $header_height;
+	.is_login {
+		float: right;
+		margin: 15px;
+		color: white;
+		font-weight: bold;
+		font-size: 1.5em;
+	}
+	.button_to {
+		float: right;
+		margin: 10px 30px;
+		.sign_out_btn {
+			@extend .btn;
+			@extend .btn-default;
+			@extend hover;
+			font-weight:	bold;
+			font-size:	1.2em;
+			color: $light_blue;
+		}
+	}
+}
+
+footer {
+	position: relative;
+	text-align: center;
+	background-color: $light_blue;
+	width: 100%;
+	height: $header_height;
+	.tobitate_link {
+		float: right;
+		img {
+			width: 140px;
+			height:	$header_height - $img_vertical_margin * 2;
+			margin: $img_vertical_margin 15px;
+		}
+	}
+	.contact {
+		margin: 15px 0;
+		color: white;
+		font-size: 1.5em;
+	}
+}
+
+.my_container {
+	@extend .container;
+	@extend .text-center;
+	width: 60%;
+	height: auto;
+	height: 100%;
+	margin-top: $header-height + 30px;
+	margin-bottom: 30px;
+	border-style: dashed;
+}
+
+form table {
+	$input_width: 400px;
+	$textarea_height: 100px;
+
+	margin: 0 auto;
+	border-collapse: separate;
+	border-spacing: 1.5em;
+	th {
+		display: inline;
+		float: left;
+		.mandatory {
+			display: inline;
+			color: $notice_red;
+			font-weight: bold;
+		}
+	}
+	input {
+		width: $input_width;
+	}
+	textarea {
+		width: $input_width;
+		height: $textarea_height;
+	}
+	select {
+		width: $input_width;
+		float: left;
+		overflow: hidden;
+	}
+}
+
+.home table {
+	margin: 20px auto;
+	.button_to {
+		input[type="submit"] {
+			@extend .btn;
+			@extend .btn-primary;
+			@extend hover;
+			width: 200px;
+			height: 50px;
+			font-weight: bold;
+			font-size: 1.2em;
+			background-color: $light_blue;
+		}
+	}
+}
+
+img.photo {
+	width: 50px;
+	height: 50px;
+}
+
+.actions {
+	.actions-design {
+		@extend hover;
+		font-weight:	bold;
+		font-size:	1.5em;
+		background-color:	white;
+		border-style:	none;
+		margin: 10px;
+	}
+
+	input[type="submit"] {
+		@extend .actions-design;
+	}
+
+	a {
+		@extend .actions-design;
+		&:hover {
+				text-decoration: none;
+		}
+	}
+}
+
+#error_explanation {
+	ul {
+		@extend .alert;
+		@extend .alert-danger;
+		list-style: none;
+		margin-top: 1.5em;
+	}
+}
+
+.notice {
+	@extend .alert;
+	margin: 1.5em 0 0;
+}
+
+.field_with_errors {
+	display: inline;
+}
