@@ -3,22 +3,57 @@
 .my_container
 	%h1= t "page_title.add_article"
 
-	- if @article.errors.any?
+	- if @article.errors.any? or flash[:error].present?
 		.alert.alert-danger.fade.in
 			%button.close(data-dismiss="alert" aria-label="close")
 				&times;
 			- @article.errors.messages.each_value do |message|
 				%p= message[0]
+			- flash[:error].each do |item|
+				%p
+					%strong= item
+					= t("article.item_mandatory")
 
 	%ul.nav.nav-tabs
-		%li.active
-			%a{href: "#lecture", "data-toggle" => "tab"}= t("article.lecture")
-		%li
-			%a{href: "#activity", "data-toggle" => "tab"}= t("article.activity")
-		%li
-			%a{href: "#shopping", "data-toggle" => "tab"}= t("article.shopping")
+		- @categories.each do |category|
+			%li{class: "#{"active" if @active_category_id == category.id}"}
+				%a{href: "##{category.en}", "data-toggle" => "tab"}= category.ja
 
 	.tab-content
-		.tab-pane.active#lecture= render "articles/lecture_content"
-		.tab-pane#activity= render "articles/activity_content"
-		.tab-pane#shopping= render "articles/shopping_content"
+		- @categories.each do |category|
+			%div{class: "tab-pane #{"active" if @active_category_id == category.id}", id: category.en}
+				= form_for @article do |a|
+					= a.hidden_field :category_id, value: category.id
+					%table.field
+						%tr
+							%th
+								= a.label :title
+								.mandatory= t "form.mandatory"
+							%td= a.text_field :title, required: true, autofocus: true, placeholder: t("article.p_title")
+						%tr
+							%th
+								= a.label :university
+								.mandatory= t "form.mandatory"
+							%td
+								= a.collection_select(:university_id, @universities, :id, :name_en, {:include_blank => t("article.university_blank"), :selected => @user_university}, {:required => true})
+								%br= link_to t("article.university_not_found"), new_university_path
+
+						- # カテゴリのフォーム
+						- @items.where(category_id: category.id).each do |i|
+							%tr
+								%th
+									= i.name
+									- if i.mandatory
+										.mandatory= t "form.mandatory"
+								%td
+									-# input_typeの種類が増えたときは、ここのcase文を増やしてください。
+									- case i.input_type when "textarea"
+										= text_area :item, i.id, required: i.mandatory, placeholder: i.placeholder
+									- else
+										= text_field :item, i.id, required: i.mandatory, placeholder: i.placeholder
+
+						%tr
+							%th= a.label :photo
+							%td= a.file_field 'photo'
+
+					.actions= a.submit t("article.post")

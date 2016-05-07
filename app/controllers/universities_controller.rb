@@ -2,8 +2,14 @@ class UniversitiesController < ApplicationController
 	before_action :authenticate_user!
 	before_action :find_user
 
+	def show
+	end
+
 	def new
 		@university = University.new
+	end
+
+	def edit
 	end
 
 	def create
@@ -14,7 +20,7 @@ class UniversitiesController < ApplicationController
 		redirect_to home_index_path(university_created_info: info)
 	end
 
-	def edit
+	def update
 	end
 
 	def destroy

@@ -208,7 +208,7 @@ ja:
     user_datum_sign_up: 投稿者データ登録
     pasword_reset: パスワード再設定
     add_univ: 新規大学登録
-    add_article: 新規記事作成
+    add_article: 新規記事投稿
   authentication:
     is_login: ログイン中： 
     sign_out: ログアウト
@@ -235,6 +235,12 @@ ja:
     e_name_en: 漢字、ひらがな、カタカナのいずれかを含めてください。
     p_recommended_point: ex. アットホームで熱意あふれる校風
     p_comment: ex. 誰もが自分の夢に向かって努力を続けています。学生がフレンドリーで、過ごしやすい学校です。あなたもこの学校で、未来への扉を開いてみませんか？
+  article:
+    p_title: ex. 私の留学体験記 -1-
+    post: 投稿する
+    university_blank: 大学を選択(英語表記、アルファベット順)
+    university_not_found: 大学が見つからない?
+    item_mandatory: は必須項目です。
   form:
     mandatory: (必須)
     new_registration: 新規登録
@@ -271,5 +277,6 @@ ja:
         map_input: 大学の場所　地図をクリックしてください
       article:
         title: タイトル
+        university: 大学
         photo: 写真
   site_title: RyugakuHub

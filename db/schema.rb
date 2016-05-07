@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506124458) do
+ActiveRecord::Schema.define(version: 20160506193937) do
 
   create_table "articles", force: :cascade do |t|
-    t.integer  "user_id",            limit: 4,        null: false
-    t.integer  "category_id",        limit: 4,        null: false
-    t.integer  "university_id",      limit: 4,        null: false
-    t.string   "title",              limit: 255,      null: false
-    t.datetime "updated_at",                          null: false
+    t.integer  "user_id",            limit: 4,                    null: false
+    t.integer  "category_id",        limit: 4,                    null: false
+    t.integer  "university_id",      limit: 4,                    null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.integer  "access",             limit: 4,        default: 0
+    t.integer  "short_term_access",  limit: 4,        default: 0
+    t.string   "title",              limit: 255,                  null: false
     t.binary   "photo",              limit: 16777215
     t.string   "photo_content_type", limit: 255
   end
@@ -42,8 +45,9 @@ ActiveRecord::Schema.define(version: 20160506124458) do
 
   create_table "items", force: :cascade do |t|
     t.integer "category_id", limit: 4,                      null: false
+    t.integer "order",       limit: 4
     t.string  "name",        limit: 255,                    null: false
-    t.string  "type",        limit: 255,   default: "text"
+    t.string  "input_type",  limit: 255,   default: "text"
     t.boolean "mandatory",                 default: true
     t.text    "placeholder", limit: 65535
   end
@@ -72,9 +76,9 @@ ActiveRecord::Schema.define(version: 20160506124458) do
 
   create_table "university_photos", force: :cascade do |t|
     t.integer "university_id", limit: 4,        null: false
+    t.string  "name",          limit: 255,      null: false
     t.binary  "photo",         limit: 16777215, null: false
     t.string  "content_type",  limit: 255,      null: false
-    t.string  "name",          limit: 255
   end
 
   create_table "users", force: :cascade do |t|
@@ -91,9 +95,9 @@ ActiveRecord::Schema.define(version: 20160506124458) do
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
     t.string   "name",                   limit: 255,                   null: false
+    t.integer  "university_id",          limit: 4
     t.text     "comment",                limit: 65535,                 null: false
     t.string   "country_region",         limit: 255,                   null: false
-    t.integer  "university_id",          limit: 4
     t.binary   "photo",                  limit: 16777215
     t.string   "photo_content_type",     limit: 255
   end

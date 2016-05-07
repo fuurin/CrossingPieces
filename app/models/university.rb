@@ -18,9 +18,11 @@ class University < ActiveRecord::Base
 	validates :recommended_point, presence: {message: "おすすめポイントを入力してください。"}
 	validates :comment, presence: {message: "おすすめポイントの説明を入力してください。"}
 	validates :created_by, presence: {message: "ログインした状態で大学を追加してください。"},
-		numericality: {only_integer: true, message: "不正なユーザIDです。"}
+		numericality: {only_integer: true, greater_than_or_equal_to: 0, 
+			message: "不正な大学追加ユーザIDです。"}
 	validates :created_at, presence: {message: "大学を追加した時間を記録できませんでした。"}
 	validates :updated_by, presence: {message: "ログインした状態で大学の情報を更新してください。"},
-		numericality: {only_integer: true, message: "不正なユーザIDです。"}
+		numericality: {only_integer: true, greater_than_or_equal_to: 0, 
+			message: "不正な大学更新ユーザIDです。"}
 	validates :updated_at, presence: {message: "大学情報を更新した時間を記録できませんでした。"}
 end

@@ -67,6 +67,11 @@ form table {
 		width: $input_width;
 		height: $textarea_height;
 	}
+	select {
+		width: $input_width;
+		float: left;
+		overflow: hidden;
+	}
 }
 
 .home table {
