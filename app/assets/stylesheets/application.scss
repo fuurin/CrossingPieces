@@ -94,6 +94,12 @@ footer {
 	}
 }
 
+#input-map {
+	width: 80%;
+	height: 380px;
+	margin: 20px auto;
+}
+
 .my_container {
 	$vertical_margin: 30px;
 	@extend .container;
@@ -102,6 +108,12 @@ footer {
 	margin-top: $header-height + $vertical_margin;
 	margin-bottom: $vertical_margin;
 	border-style: dashed;
+
+	.mandatory {
+		display: inline;
+		color: $notice_red;
+		font-weight: bold;
+	}
 }
 
 form table {
@@ -114,11 +126,6 @@ form table {
 	th {
 		display: inline;
 		float: left;
-		.mandatory {
-			display: inline;
-			color: $notice_red;
-			font-weight: bold;
-		}
 	}
 	input {
 		width: $input_width;
@@ -150,7 +157,7 @@ form table {
 	}
 }
 
-img.photo {
+img.user_icon {
 	width: 50px;
 	height: 50px;
 }

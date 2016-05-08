@@ -236,6 +236,8 @@ ja:
     e_name_en: 漢字、ひらがな、カタカナのいずれかを含めてください。
     p_recommended_point: ex. アットホームで熱意あふれる校風
     p_comment: ex. 誰もが自分の夢に向かって努力を続けています。学生がフレンドリーで、過ごしやすい学校です。あなたもこの学校で、未来への扉を開いてみませんか？
+    add: を追加しました。
+    photo: 写真(2MBまで)(%{num}枚目)
   article:
     p_title: ex. 私の留学体験記 -1-
     university_blank: 大学を選択(英語表記、アルファベット順)
@@ -255,7 +257,7 @@ ja:
         password: パスワード
         comment: 自己紹介
         country_region: 留学した国・地域
-        photo: アイコン画像
+        photo: アイコン画像(2MBまで)
         photo_content_type: JPEG,PNG,GIFのいずれかでない画像の形式
         minimum_password_length: 文字以上
         password_confirmation: パスワード確認
@@ -270,15 +272,11 @@ ja:
         remove_photo_button: 削除
         select_file: ファイルを選択
         unselected_file: 選択されていません
-        photo1: 写真(1枚目)
-        photo2: 写真(2枚目)
-        photo3: 写真(3枚目)
         remove: 削除
         add_photo_button: 写真を追加
-        map_input: 大学の場所　地図をクリックしてください
-        add: を追加しました。
+        input_map: 大学の場所　地図をクリックしてください
       article:
         title: タイトル
         university: 大学
-        photo: 写真
+        photo: 写真(2MBまで)
   site_title: RyugakuHub

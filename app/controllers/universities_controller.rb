@@ -1,6 +1,6 @@
 class UniversitiesController < ApplicationController
 	before_action :authenticate_user!
-	before_action :find_user
+	before_action :set_photos_num, only: [:new, :edit, :create, :update]
 
 	def show
 	end
@@ -14,85 +14,63 @@ class UniversitiesController < ApplicationController
 
 	def create
 		@university = University.new(university_params)
-		@map = UniversityMap.new(map_params)
-		@photos = save_photos(@university.id)
-		return render('new') unless @university.save,
-		map_warning: save_map(@university.id)}
-		flash[:notice] = {subject: @university.name_ja, action: t("university.add")}
-		redirect_to home_index_path
+		@invalid_photos = invalid_photos
+		if @university.valid? and @invalid_photos.empty?
+			@university.save
+			UniversityPhoto.import photos(@university.id)
+			flash[:notice] = {subject: @university.name_ja, action: t("university.add")}
+			redirect_to home_index_path
+		else render 'new' end
 	end
 
 	def update
 	end
 
-	def destroy
-		# Destroy all at the same time
+	def destroy # Destroy all pictures at the same time
 	end
 
- 	private
+	private
 
- 	# For University
- 	def university_params
- 		register_creater params[:university]
- 		register_updater params[:university]
-  	params[:university].permit :name_en, :name_ja, :recommended_point, :comment,
-  		:created_by, :created_at, :updated_by, :updated_at
-  end
-
- 	def register_creater university_params
- 		university_params[:created_by] = current_user.id
- 		university_params[:created_at] = Time.zone.now
- 	end
-
- 	def register_updater university_params
- 		university_params[:updated_by] = current_user.id
- 		university_params[:updated_at] = Time.zone.now
- 	end
-
-
-
- 	# For UniversityPhoto
-  def photos_params
-  	params[:university].require(:photos).permit!
-  end
-
-  def make_photo photo, id
-  	{ :name => photo.original_filename, :photo => photo.read,
-  		:content_type => photo.content_type, :university_id => id } if photo.present?
-  end
-
-  def save_photos id
-  	return [] if params[:university][:photos].nil?
-  	photos = photos_params.map {|k, p| UniversityPhoto.new(make_photo(p, id))}
-  	UniversityPhoto.import(photos).failed_instances.map{|p| p[:name]}
+	def set_photos_num
+		@photos_num = 3
 	end
 
+	def university_params
+		params[:university].merge!(creater_params) if params[:action] == "create"
+		params[:university].merge!(updater_params).merge!(map_params)
+		params[:university].permit :name_en, :name_ja, :recommended_point, :comment,
+			:created_by, :created_at, :updated_by, :updated_at, :lat, :lng, :zoom
+	end
 
+	def creater_params
+		{created_by: current_user.id, created_at: Time.zone.now}
+	end
 
-	# For UniversityMap
+	def updater_params
+		{updated_by: current_user.id, updated_at: Time.zone.now}
+	end
+
 	def map_params
-		map = params[:map]
-		map[:lat] = map[:lat].to_f if map[:lat] =~ /^[+-]?\d+\.?\d+$/
-		map[:lng] = map[:lng].to_f if map[:lng] =~ /^[+-]?\d+\.?\d+$/
-		map[:zoom] = map[:zoom].to_i if map[:zoom] =~ /^\d+$/
-  	map.permit :lat, :lng, :zoom
-  end
-
-  def make_map map, id
-  	{ :lat => map[:lat], :lng => map[:lng],
-  		:zoom => map[:zoom], :university_id => id}
-  end
-
-	def save_map id
-		return [] if params[:map][:lat].nil? or params[:map][:lng].nil?
-		university_map = UniversityMap.new make_map(map_params, id)
-		return [] if university_map.save
-		university_map.errors.messages.map{|key, message| message}.flatten
+		p = params[:university]
+		lat = p[:lat] =~ /^[+-]?\d+\.?\d+$/ ? p[:lat].to_f : nil
+		lng = p[:lng] =~ /^[+-]?\d+\.?\d+$/ ? p[:lng].to_f : nil
+		zoom = p[:zoom] =~ /^\d+$/ ? p[:zoom].to_i : nil
+		{lat: lat, lng: lng, zoom: zoom}
 	end
 
 
+	def photo_params photo, id
+		{ name: photo.original_filename, content_type: photo.content_type,
+			photo: id.nil? ? nil : photo.read, university_id: id }
+	end
 
-  def find_user
-    @user = User.find(current_user.id)
-  end
+	def photos id
+		p = params[:university][:photos]
+		return [] if p.nil?
+		p.map{ |key, photo| UniversityPhoto.new(photo_params(photo, id)) }
+	end
+
+	def invalid_photos
+		photos(nil).select{|photo| photo.valid? == false}
+	end
 end

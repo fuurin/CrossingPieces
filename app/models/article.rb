@@ -23,8 +23,8 @@ class Article < ActiveRecord::Base
 	validates :short_term_access, numericality: {only_integer: true, 
 		greater_than_or_equal_to: 0, message: "不正な短期アクセス数です。"}
 	validates :photo, 
-		length: {maximum: 1.megabytes, message: "画像ファイルの最大サイズは1MBです。"}
-	validates :photo_content_type, 
+		length: {maximum: 2.megabytes, message: "画像ファイルの最大サイズは2MBです。"}
+	validates :photo_content_type, allow_blank: true,
 		format: {with: /(image\/jpeg)|(image\/png)|(image\/gif)/,
-		message: "アップロードできる画像の形式は、JPEG,PNG,GIFのいずれかです。"}, allow_blank: true
+		message: "アップロードできる画像の形式は、JPEG,PNG,GIFのいずれかです。"}
 end

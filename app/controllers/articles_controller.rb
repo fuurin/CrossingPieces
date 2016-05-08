@@ -1,8 +1,8 @@
 class ArticlesController < ApplicationController
 	before_action :authenticate_user!
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
-	before_action :find_university, only: [:new]
-	before_action :ready_to_post, only: [:new, :create]
+	before_action :find_user_university, only: [:new, :create, :update]
+	before_action :ready_to_post, only: [:new, :create, :update]
 
 	def show
 	end
@@ -53,7 +53,7 @@ class ArticlesController < ApplicationController
 			@article = Article.find(params[:id])
 		end
 
-		def find_university
+		def find_user_university
 			return @user_university = nil if current_user.university_id.nil?
 			@user_university = University.find(current_user.university_id).name_en
 		end
@@ -66,21 +66,22 @@ class ArticlesController < ApplicationController
 
 		def article_params
 			params[:article][:user_id] = current_user.id
-			photo_params
-			time_params
+			params[:article].merge!(time_params).merge!(photo_params)
 			params.require(:article).permit :user_id, :category_id, :university_id, 
-				:created_at, :updated_at, :title, :photo, :photo_content_type
+				:created_at, :updated_at, :title, :photo, :photo_name, :photo_content_type
 		end
 
 		def photo_params
-			return if params[:article][:photo].nil?
-			params[:article][:photo_content_type] = params[:article][:photo].content_type
-			params[:article][:photo] = params[:article][:photo].read
+			photo = params[:article][:photo]
+			return {} if photo.nil?
+			{ photo_name: photo.original_filename,
+				photo_content_type: photo.content_type, photo: photo.read } 
 		end
 
 		def time_params
-			params[:article][:created_at] = Time.zone.now if params["action"] == "create"
-			params[:article][:updated_at] = Time.zone.now
+			if params["action"] == "create"
+				return {created_at: Time.zone.now, updated_at: Time.zone.now}
+			else return {updated_at: Time.zone.now} end
 		end
 
 		def contents

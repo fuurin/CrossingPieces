@@ -6,12 +6,12 @@ $ ->
 	# Google Maps
 	marker = null
 	options = {zoom: 1, center: new google.maps.LatLng 39, 138}
-	map = new google.maps.Map $('#map-input').get(0), options
+	map = new google.maps.Map $('#input-map').get(0), options
 	google.maps.event.addListener map, 'click', (e) ->
 		marker.setMap null if marker
 		place = new google.maps.LatLng e.latLng.lat(), e.latLng.lng()
 		marker = new google.maps.Marker {map: map, position: place}
-		$('#map_lat').val place.lat()
-		$('#map_lng').val place.lng()
+		$('#university_lat').val place.lat()
+		$('#university_lng').val place.lng()
 	google.maps.event.addListener map, 'zoom_changed', ->
-		$('#map_zoom').val map.getZoom()
+		$('#university_zoom').val map.getZoom()

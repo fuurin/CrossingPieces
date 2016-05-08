@@ -14,9 +14,9 @@
 	%h3
 		= t "home.welcome"
 		- if @user.photo.nil?
-			=image_tag "no-image.png", :class => "photo"
+			=image_tag "no-image.png", class: "user_icon"
 		- else
-			=image_tag get_photo_user_path(current_user.id), :class => "photo"
+			=image_tag get_photo_user_path(current_user.id), class: "user_icon"
 		%strong
 			%em= current_user.name
 		= t "home.san"

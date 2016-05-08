@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506193937) do
+ActiveRecord::Schema.define(version: 20160508080858) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "user_id",            limit: 4,                    null: false
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160506193937) do
     t.integer  "short_term_access",  limit: 4,        default: 0
     t.string   "title",              limit: 255,                  null: false
     t.binary   "photo",              limit: 16777215
+    t.string   "photo_name",         limit: 255
     t.string   "photo_content_type", limit: 255
   end
 
@@ -55,29 +56,23 @@ ActiveRecord::Schema.define(version: 20160506193937) do
   add_index "items", ["category_id"], name: "fk_rails_89fb86dc8b", using: :btree
 
   create_table "universities", force: :cascade do |t|
-    t.string   "name_en",           limit: 255,   null: false
-    t.string   "name_ja",           limit: 255,   null: false
-    t.string   "recommended_point", limit: 255,   null: false
-    t.text     "comment",           limit: 65535, null: false
-    t.integer  "created_by",        limit: 4,     null: false
-    t.datetime "created_at",                      null: false
-    t.integer  "updated_by",        limit: 4,     null: false
-    t.datetime "updated_at",                      null: false
+    t.string   "name_en",           limit: 255,                             null: false
+    t.string   "name_ja",           limit: 255,                             null: false
+    t.string   "recommended_point", limit: 255,                             null: false
+    t.text     "comment",           limit: 65535,                           null: false
+    t.integer  "created_by",        limit: 4,                               null: false
+    t.datetime "created_at",                                                null: false
+    t.integer  "updated_by",        limit: 4,                               null: false
+    t.datetime "updated_at",                                                null: false
+    t.decimal  "lat",                             precision: 20, scale: 17, null: false
+    t.decimal  "lng",                             precision: 20, scale: 17, null: false
+    t.integer  "zoom",              limit: 2,                               null: false
   end
-
-  create_table "university_maps", force: :cascade do |t|
-    t.integer "university_id", limit: 4,                           null: false
-    t.decimal "lat",                     precision: 20, scale: 17, null: false
-    t.decimal "lng",                     precision: 20, scale: 17, null: false
-    t.integer "zoom",          limit: 2,                           null: false
-  end
-
-  add_index "university_maps", ["university_id"], name: "fk_rails_f479d3627b", using: :btree
 
   create_table "university_photos", force: :cascade do |t|
     t.integer "university_id", limit: 4,        null: false
-    t.string  "name",          limit: 255,      null: false
     t.binary  "photo",         limit: 16777215, null: false
+    t.string  "name",          limit: 255,      null: false
     t.string  "content_type",  limit: 255,      null: false
   end
 
@@ -110,5 +105,4 @@ ActiveRecord::Schema.define(version: 20160506193937) do
   add_foreign_key "contents", "articles"
   add_foreign_key "contents", "items"
   add_foreign_key "items", "categories"
-  add_foreign_key "university_maps", "universities"
 end

@@ -38,7 +38,7 @@
 								= a.collection_select(:university_id, @universities, :id, :name_en, {:include_blank => t("article.university_blank"), :selected => @user_university}, {:required => true})
 								%br= link_to t("article.university_not_found"), new_university_path
 
-						- # カテゴリのフォーム
+						- # 各カテゴリのフォーム
 						- @items.where(category_id: category.id).each do |i|
 							%tr
 								%th
@@ -54,6 +54,6 @@
 
 						%tr
 							%th= a.label :photo
-							%td= a.file_field 'photo'
+							%td= a.file_field 'photo', {"accept" => "image/*"}
 
 					.actions= a.submit t("helpers.submit.post")
