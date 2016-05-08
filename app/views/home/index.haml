@@ -3,30 +3,13 @@
 .my_container
 	%h1= t "page_title.user_home"
 
-	- if params[:university_created_info].present?
-		- info = params[:university_created_info]
+	- if flash[:notice].present?
 		.alert.alert-info.fade.in
 			%button.close(data-dismiss="alert" aria-label="close")
 				&times;
-			%strong= info[:name]
-			= t "home.add_complete"
-
-		- if info[:photos_warning].present?
-			.alert.alert-warning.fade.in
-				%button.close(data-dismiss="alert" aria-label="close")
-					&times;
-				- info[:photos_warning].each do |file|
-					%p
-						%strong= file
-						= t("home.photo_failed")
-
-		- if info[:map_warning].present?
-			.alert.alert-warning.fade.in
-				%button.close(data-dismiss="alert" aria-label="close")
-					&times;
-				- info[:map_warning].each do |message|
-					%p= message
-
+			-# このstrong部分にshowへのリンク埋めたい
+			%strong= flash[:notice]["subject"]
+			= flash[:notice]["action"]
 
 	%h3
 		= t "home.welcome"

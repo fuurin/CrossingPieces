@@ -21,15 +21,15 @@
 @import "color";
 @import "function";
 
-
-
-//
-// Declare whole tag
-//
+html {
+	min-height: 100%;
+	position: relative;
+}
 
 body {
 	color:	$light_blue;
 	font-family: verdana, arial, helvetica, sans-serif;
+	margin-bottom: 5em;
 }
 
 a {
@@ -37,13 +37,12 @@ a {
 	color:	$light_blue;
 }
 
-$header_height: 60px;
-$img_vertical_margin: 10px;
-
+$header_height: 50px;
+$img_vertical_margin: 8px;
 
 img.logo {
 	float: left;
-	width:	180px;
+	width: 150px;
 	height:	$header_height - $img_vertical_margin * 2;
 	margin: $img_vertical_margin 15px;
 }
@@ -54,29 +53,27 @@ header {
 	top: 0;
 	width: 100%;
 	height: $header_height;
+	z-index: 9999;
 	.is_login {
 		float: right;
-		margin: 15px;
+		line-height: 50px;
 		color: white;
 		font-weight: bold;
-		font-size: 1.5em;
+		font-size: 1.4em;
 	}
-	.button_to {
-		float: right;
-		margin: 10px 30px;
-		.sign_out_btn {
-			@extend .btn;
-			@extend .btn-default;
-			@extend hover;
-			font-weight:	bold;
-			font-size:	1.2em;
-			color: $light_blue;
-		}
+	.sign_out_btn {
+		@extend .btn;
+		@extend .btn-default;
+		@extend hover;
+		font-weight:	bold;
+		font-size:	1.2em;
+		color: $light_blue;
 	}
 }
 
 footer {
-	position: relative;
+	position: absolute;
+	bottom: 0;
 	text-align: center;
 	background-color: $light_blue;
 	width: 100%;
@@ -84,33 +81,33 @@ footer {
 	.tobitate_link {
 		float: right;
 		img {
-			width: 140px;
+			width: 120px;
 			height:	$header_height - $img_vertical_margin * 2;
 			margin: $img_vertical_margin 15px;
 		}
 	}
 	.contact {
-		margin: 15px 0;
+		margin: 25px 0;
+		line-height: 50px;
 		color: white;
 		font-size: 1.5em;
 	}
 }
 
 .my_container {
+	$vertical_margin: 30px;
 	@extend .container;
 	@extend .text-center;
-	width: 60%;
-	height: auto;
-	height: 100%;
-	margin-top: $header-height + 30px;
-	margin-bottom: 30px;
+	width: 80%;
+	margin-top: $header-height + $vertical_margin;
+	margin-bottom: $vertical_margin;
 	border-style: dashed;
 }
 
 form table {
-	$input_width: 400px;
+	$input_width: 100%;
 	$textarea_height: 100px;
-
+	width: 90%;
 	margin: 0 auto;
 	border-collapse: separate;
 	border-spacing: 1.5em;
@@ -156,6 +153,11 @@ form table {
 img.photo {
 	width: 50px;
 	height: 50px;
+}
+
+.button_to {
+	float: right;
+	margin: 7px 20px;
 }
 
 .actions {

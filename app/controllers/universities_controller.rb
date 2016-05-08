@@ -14,10 +14,12 @@ class UniversitiesController < ApplicationController
 
 	def create
 		@university = University.new(university_params)
-		return render('new') unless @university.save
-		info = {name: @university.name_ja, photos_warning: save_photos(@university.id),
-			map_warning: save_map(@university.id)}
-		redirect_to home_index_path(university_created_info: info)
+		@map = UniversityMap.new(map_params)
+		@photos = save_photos(@university.id)
+		return render('new') unless @university.save,
+		map_warning: save_map(@university.id)}
+		flash[:notice] = {subject: @university.name_ja, action: t("university.add")}
+		redirect_to home_index_path
 	end
 
 	def update

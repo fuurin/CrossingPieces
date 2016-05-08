@@ -17,13 +17,13 @@ class ArticlesController < ApplicationController
 
 	def create
 		@article = Article.new(article_params)
-		@invalid_contents = invalid_contents
-		if @article.save and @invalid_contents.empty?
+		if @article.save and invalid_contents.empty?
 			Content.import contents
-			redirect_to home_index_path, notice: @article.title
+			flash[:notice] = {subject: @article.title, action: t("article.post")}
+			redirect_to home_index_path
 		else
 			@active_category_id = params[:article][:category_id].to_i
-			flash[:error] = @invalid_contents
+			flash[:error] = invalid_contents
 			render 'new'
 		end
 	end
@@ -66,7 +66,8 @@ class ArticlesController < ApplicationController
 
 		def article_params
 			params[:article][:user_id] = current_user.id
-			time_params and photo_params
+			photo_params
+			time_params
 			params.require(:article).permit :user_id, :category_id, :university_id, 
 				:created_at, :updated_at, :title, :photo, :photo_content_type
 		end
