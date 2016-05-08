@@ -1,32 +1,35 @@
 = render "devise/shared/header"
 
 .my_container
-	%h1= t "page_title.user_home"
-
-	- if flash[:notice].present?
-		.alert.alert-info.fade.in
-			%button.close(data-dismiss="alert" aria-label="close")
-				&times;
-			-# このstrong部分にshowへのリンク埋めたい
-			%strong= flash[:notice]["subject"]
-			= flash[:notice]["action"]
-
-	%h3
-		= t "home.welcome"
-		- if @user.photo.nil?
-			=image_tag "no-image.png", class: "user_icon"
-		- else
-			=image_tag get_photo_user_path(current_user.id), class: "user_icon"
-		%strong
-			%em= current_user.name
-		= t "home.san"
-
-	.home
+	.buttons
 		%table
 			%tr
 				%td= button_to t("home.author_info"), home_index_path
+			%tr
 				%td= button_to t("home.add_univ"), new_university_path, method: :get
-
 			%tr
 				%td= button_to t("home.new_article"), new_article_path, method: :get
-				%td= button_to t("home.list_article"), home_index_path
+			-#%tr
+				-# %td= button_to t("home.list_univ"), home_index_path
+				-# %td= button_to t("home.list_article"), home_index_path
+
+	.home
+		%h1= t "page_title.user_home"
+
+		- if flash[:notice].present?
+			.alert.alert-info.fade.in
+				%button.close(data-dismiss="alert" aria-label="close")
+					&times;
+				-# このstrong部分にshowへのリンク埋めたい
+				%strong= flash[:notice]["subject"]
+				= flash[:notice]["action"]
+
+		%h3
+			= t "home.welcome"
+			- if @user.photo.nil?
+				=image_tag "no-image.png", class: "user_icon"
+			- else
+				=image_tag get_photo_user_path(current_user.id), class: "user_icon"
+			%strong
+				%em= current_user.name
+			= t "home.san"
