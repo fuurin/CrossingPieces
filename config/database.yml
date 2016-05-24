@@ -15,7 +15,7 @@ default: &default
   pool: 5
   username: root
   password: ssag2016
-  host: 52.69.3.104
+  host: 52.39.133.169
 
 development:
   <<: *default
