@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: RyugakuHub_production
-  username: RyugakuHub
-  password: <%= ENV['RYUGAKUHUB_DATABASE_PASSWORD'] %>
+  # username: RyugakuHub
+  # password: <%= ENV['RYUGAKUHUB_DATABASE_PASSWORD'] %>

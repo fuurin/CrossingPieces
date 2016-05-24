@@ -59,7 +59,7 @@
       %tr
         .field
           %th= f.label :photo
-          %td= f.file_field("photo"), {"accept" => "image/*"}
+          %td= f.file_field("photo", {"accept" => "image/*"})
 
     .actions= f.submit 
       
