@@ -30,6 +30,7 @@ Rails.application.configure do
 
   # productionモードで利用したいアセットファイルはここに記載すること
   config.assets.precompile += %w( university.coffee )
+  config.assets.precompile += %w( top.coffee )
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true

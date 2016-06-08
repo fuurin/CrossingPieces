@@ -28,7 +28,7 @@ html {
 
 body {
 	color:	$light_blue;
-	font-family: verdana, arial, helvetica, sans-serif;
+	font-family: 'Lucida Grande', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, sans-serif;
 	margin-bottom: 5em;
 }
 
@@ -69,6 +69,18 @@ header {
 		font-size:	1.2em;
 		color: $light_blue;
 	}
+	.scroll-nav {
+		float: right;
+		margin: 10px 50px; 
+		a {
+			@extend hover;
+			color: white;
+			text-decoration: none;
+			cursor: pointer;
+			font-size: 20px;
+			margin-right: 20px;
+		}
+	}
 }
 
 footer {
@@ -100,12 +112,90 @@ footer {
 	margin: 20px auto;
 }
 
-.my_container {
+#map {
+	width: 80%;
+	height: 380px;
+	margin: 0 auto;
+}
+
+#about {
+	width: 100%;
+	margin: 50px auto;
+	padding: 30px 10px 30px;
+	font-size: 22px;
+	border-style: solid;
+	border-color: $light-blue;
+	border-width: 1px;
+
+
+	hr {
+		width: 95%;
+		height: 1px;
+		border-style: solid;
+		border-color: $light_blue;
+		margin: 40px auto 40px;
+	}
+
+	#feature {
+		text-align: left;
+		padding-left: 30px;
+		font-size: 18px;
+		p { margin: 10px 40px 0px 10px; }
+	}
+}
+
+#people {
+	$person_width: 180px;
+	font-size: 18px;
+	margin-bottom: 50px;
+
+	#selected {
+		color: $gray_strong;
+		a { cursor: pointer; }
+	}
+
+	#people_container {
+		@extend .row;
+		width: 90%;
+		height: 400px;
+		margin: 30px auto;
+		overflow: hidden;
+
+		.person {
+			img {
+				width: $person_width;
+				height: $person_width;
+			}
+			.name {
+				margin: 10px;
+				font-size: 18px;
+			}
+			.text {
+				width: $person_width + 30px;
+				height: $person_width;
+				font-size: 16px;
+				color: $gray_strong;
+				margin: 0 auto;
+			}
+		}
+	}
+}
+
+.main_container {
 	$vertical_margin: 30px;
 	@extend .container;
 	@extend .text-center;
 	width: 80%;
-	margin-top: $header-height + $vertical_margin;
+	margin-top: $header_height + $vertical_margin;
+	margin-bottom: 80px;
+}
+
+.members_container {
+	$vertical_margin: 30px;
+	@extend .container;
+	@extend .text-center;
+	width: 80%;
+	margin-top: $header_height + $vertical_margin;
 	margin-bottom: $vertical_margin;
 	border-style: dashed;
 
