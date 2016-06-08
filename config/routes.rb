@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   resources :articles
-  root 'home#index'
+  root 'top#index'
+
+  get 'top/index'
 
   get 'home/index'
 

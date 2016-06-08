@@ -9,6 +9,7 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
+//
 // requiretreeを取っ払ったので、個々のjsファイルを読み込むことができます。そのためには、
 // config/initializers/assets.rbにassetpipelineで処理するファイルを追加し、サーバを再起動してください。
 // すると、javascript_include_tagで読み込むことができるようになります。
