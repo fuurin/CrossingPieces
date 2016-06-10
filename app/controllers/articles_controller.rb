@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, only: [:new, :create, :update]
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
 	before_action :find_user_university, only: [:new, :create, :update]
 	before_action :ready_to_post, only: [:new, :create, :update]
@@ -47,6 +47,11 @@ class ArticlesController < ApplicationController
 			format.json { head :no_content }
 		end
 	end
+
+	def get_photo
+		a = Article.find(params[:id])
+  	send_data(a[:photo], :type => a[:photo_content_type], :disposition => "inline")
+  end
 
 	private
 		def set_article

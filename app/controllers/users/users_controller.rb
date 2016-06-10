@@ -1,5 +1,5 @@
 class Users::UsersController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, only: [:index, :destroy]
   before_action :find_user
   def index
   end

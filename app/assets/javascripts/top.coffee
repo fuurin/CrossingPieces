@@ -15,8 +15,6 @@ $ ->
 		return false
 	$('.scroll').click(scroll)
 
-
-
 	# Google Maps
 	options = {zoom: 1, center: new google.maps.LatLng 39, 138}
 	map = new google.maps.Map $('#map')[0], options
@@ -31,8 +29,8 @@ $ ->
 		markers.push marker
 		
 		# 吹き出し生成
-		content = '<div>' + data.attr('name_en') + '</div>' + 
-							'<div>' + data.attr('name_ja') + '</div>'
+		content = '<a href="universities/' + data.attr('value') + '">' + data.attr('name_en') + '<br/>' + data.attr('name_ja') + '</a>'
+		console.log
 		infoWindows.push(new google.maps.InfoWindow({content: content}))
 
 		#　クリックで吹き出しが出るようにする

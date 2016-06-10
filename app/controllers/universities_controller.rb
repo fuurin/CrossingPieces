@@ -1,8 +1,13 @@
 class UniversitiesController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, only: [:new, :edit, :create, :update]
 	before_action :set_photos_num, only: [:new, :edit, :create, :update]
 
 	def show
+		@categories = Category.all
+		@users = User.all
+		@university = University.find(params[:id]) || return
+		@photosNum = UniversityPhoto.where("university_id = ?", @university.id).length
+		@articles = Article.where("university_id = ?", @university.id).order("id DESC")
 	end
 
 	def new
@@ -28,6 +33,12 @@ class UniversitiesController < ApplicationController
 
 	def destroy # Destroy all pictures at the same time
 	end
+
+	def get_photo
+		num = params[:photo_num].to_i
+		p = UniversityPhoto.where("university_id = ?", params[:id])[num]
+  	send_data(p[:photo], :type => p[:content_type], :disposition => "inline")
+  end
 
 	private
 
