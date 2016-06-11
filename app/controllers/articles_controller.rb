@@ -14,6 +14,7 @@ class ArticlesController < ApplicationController
 		@items = Item.where("category_id = ?", @article.category_id).order("'order'")
 		@articles = Article.where("university_id = ?", @university.id).order("id DESC")
 		@contents = Content.where("article_id = ?", @article.id)
+		add_access @article
 	end
 
 	def new
@@ -111,5 +112,10 @@ class ArticlesController < ApplicationController
 			Item.name if item.mandatory and content.empty?
 		end
 		Hash[invalid.map {|k, v| [Item.find(k).name, v]}]
+	end
+
+	def add_access article
+		article.access += 1
+		article.save
 	end
 end

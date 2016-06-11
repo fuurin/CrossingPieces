@@ -8,9 +8,9 @@
   %h3= link_to @university.name_en, university_path(@university.id)
 
   - if @article.photo.nil?
-    = image_tag "no-image.png", class: "show_article_photo"
+    = image_tag "no-image.png", class: "show_photo"
   - else
-    = image_tag get_photo_article_path(@article.id), class: "show_article_photo"
+    = image_tag get_photo_article_path(@article.id), class: "show_photo"
 
   #content_container
     %h1= @article.title

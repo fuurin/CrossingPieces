@@ -281,6 +281,10 @@ $person_width: 180px;
 			.name {
 				font-size: 16px;
 			}
+			.university {
+				text-align: left;
+				font-size: 16px;
+			}
 			.info {
 				text-align: left;
 				font-size: 12px;
@@ -314,7 +318,7 @@ $person_width: 180px;
 	}
 }
 
-.show_article_photo {
+.show_photo {
 	margin: 30px auto;
 }
 

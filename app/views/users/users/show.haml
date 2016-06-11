@@ -1,0 +1,48 @@
+= javascript_include_tag 'show_university'
+
+%header
+  = link_to image_tag("logo.png", class: "logo"), root_path
+
+.main_container
+  %h1= @user.name
+
+  - if @user.photo.nil?
+    = image_tag "no-image.png", class: "show_photo"
+  - else
+    = image_tag get_photo_user_path(@user.id), class: "show_photo"
+
+  #content_container
+    %h3 コメント
+    %p.content= @user.comment
+    %h3 留学先
+    %p.content= @user.country_region
+    %h3 コンタクト
+    -# 連絡先非公開機能を追加したい
+    %p.content= false ? @user.email : "公開されていません"
+
+  %h2　この人が書いた記事
+  %ol.breadcrumb
+    %li
+      %a.select_article(value="")全て
+    - @categories.each do |category|
+      %li
+        %a.select_article{value: "#{category.en}"}
+          = category.ja
+
+  #articles_container
+    - @articles.each do |article|
+      - category = @categories.find{ |c| c[:id] == article.category_id}
+      .article_container.col-sm-12.col-md-4{value: "#{category.en}"}
+        .article
+          .image_sizer
+            - if article.photo.nil?
+              = link_to image_tag("no-image.png", class: "article_photo"), article_path(article.id)
+            - else
+              = link_to image_tag(get_photo_article_path(article.id), class: "article_photo"), article_path(article.id)
+          %p.title
+            %a= link_to article.title, article_path(article.id)
+          %p.university
+            = "大学: "
+            = link_to @universities.find{ |u| u[:id] == article.university_id}.name_ja, university_path(article.university_id)
+          - time = article.updated_at.to_s.split(" ")
+          = simple_format h("カテゴリー: #{category.ja}\n更新時間: #{time[0]} #{time[1]}\n閲覧回数: #{article.access.to_s}"), class: "info"
