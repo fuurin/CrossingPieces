@@ -35,7 +35,7 @@ class UniversitiesController < ApplicationController
 	end
 
 	def get_photo
-		num = params[:photo_num].to_i
+		num = params[:num].to_i
 		p = UniversityPhoto.where("university_id = ?", params[:id])[num]
   	send_data(p[:photo], :type => p[:content_type], :disposition => "inline")
   end

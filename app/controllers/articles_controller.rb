@@ -5,6 +5,15 @@ class ArticlesController < ApplicationController
 	before_action :ready_to_post, only: [:new, :create, :update]
 
 	def show
+		@users = User.all
+		@article = Article.find(params[:id]) || return
+		@author = @users.find{ |u| u[:id] == @article.user_id}
+		@categories = Category.all
+		@categoryName = Category.find(@article.category_id).ja
+		@university = University.find(@article.university_id)
+		@items = Item.where("category_id = ?", @article.category_id).order("'order'")
+		@articles = Article.where("university_id = ?", @university.id).order("id DESC")
+		@contents = Content.where("article_id = ?", @article.id)
 	end
 
 	def new
@@ -54,52 +63,53 @@ class ArticlesController < ApplicationController
   end
 
 	private
-		def set_article
-			@article = Article.find(params[:id])
-		end
 
-		def find_user_university
-			return @user_university = nil if current_user.university_id.nil?
-			@user_university = University.find(current_user.university_id).name_en
-		end
+	def set_article
+		@article = Article.find(params[:id])
+	end
 
-		def ready_to_post
-			@universities = University.order(:name_en)
-			@categories = Category.order(:id)
-			@items = Item.order(:category_id, :order)
-		end
+	def find_user_university
+		return @user_university = nil if current_user.university_id.nil?
+		@user_university = University.find(current_user.university_id).name_en
+	end
 
-		def article_params
-			params[:article][:user_id] = current_user.id
-			params[:article].merge!(time_params).merge!(photo_params)
-			params.require(:article).permit :user_id, :category_id, :university_id, 
-				:created_at, :updated_at, :title, :photo, :photo_name, :photo_content_type
-		end
+	def ready_to_post
+		@universities = University.order(:name_en)
+		@categories = Category.order(:id)
+		@items = Item.order(:category_id, :order)
+	end
 
-		def photo_params
-			photo = params[:article][:photo]
-			return {} if photo.nil?
-			{ photo_name: photo.original_filename,
-				photo_content_type: photo.content_type, photo: photo.read } 
-		end
+	def article_params
+		params[:article][:user_id] = current_user.id
+		params[:article].merge!(time_params).merge!(photo_params)
+		params.require(:article).permit :user_id, :category_id, :university_id, 
+			:created_at, :updated_at, :title, :photo, :photo_name, :photo_content_type
+	end
 
-		def time_params
-			if params["action"] == "create"
-				return {created_at: Time.zone.now, updated_at: Time.zone.now}
-			else return {updated_at: Time.zone.now} end
-		end
+	def photo_params
+		photo = params[:article][:photo]
+		return {} if photo.nil?
+		{ photo_name: photo.original_filename,
+			photo_content_type: photo.content_type, photo: photo.read } 
+	end
 
-		def contents
-			params[:item].map do |i, c|
-				Content.new({article_id: @article.id, item_id: i, content: c})
-			end
-		end
+	def time_params
+		if params["action"] == "create"
+			return {created_at: Time.zone.now, updated_at: Time.zone.now}
+		else return {updated_at: Time.zone.now} end
+	end
 
-		def invalid_contents
-			invalid = params[:item].select do |id, content|
-				item = Item.find(id)
-				Item.name if item.mandatory and content.empty?
-			end
-			Hash[invalid.map {|k, v| [Item.find(k).name, v]}]
+	def contents
+		params[:item].map do |i, c|
+			Content.new({article_id: @article.id, item_id: i, content: c})
 		end
+	end
+
+	def invalid_contents
+		invalid = params[:item].select do |id, content|
+			item = Item.find(id)
+			Item.name if item.mandatory and content.empty?
+		end
+		Hash[invalid.map {|k, v| [Item.find(k).name, v]}]
+	end
 end

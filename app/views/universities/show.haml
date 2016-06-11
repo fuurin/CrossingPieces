@@ -12,25 +12,19 @@
 			%h2= @university.recommended_point
 			%p= @university.comment
 
-		=# Indicators
 		- if @photosNum == 0
 			-# 大学の写真が空の時
-			%ol.carousel-indicators
-				%li(data-target="#carousel-example-generic" data-slide-to="0")
-			=# Wrapper for slides
 			.carousel-inner(role="listbox")
-				.item.active=image_tag "no-image.png", class: "university_photo"
+				.item.active
+					.image_wrapper
+						=image_tag "no-image.png"
 		
 		- else
-			%ol.carousel-indicators
-				- @photosNum.times do |i|
-					%li{"data-target" => "#carousel-example-generic", "data-slide-to" => "#{i}", "class" => "#{i == 0 ? 'active' : ''}"}
-				
-			=# Wrapper for slides
 			.carousel-inner(role="listbox")
 				- @photosNum.times do |i|
 					.item{class: "#{i == 0 ? 'active' : ''}"}
-						= image_tag get_photo_university_path({id: @university.id, photo_num: i}) ,class: "university_photo"
+						.image_sizer
+							= image_tag get_photo_university_path({id: @university.id, num: i})
 
 		=# Controls
 		%a.left.carousel-control(href="#carousel-example-generic" role="button" data-slide="prev")
@@ -48,17 +42,20 @@
 				%a.select_article{value: "#{category.en}"}
 					= category.ja
 
-	#article_container
+	#articles_container
 		- @articles.each do |article|
 			- category = @categories.find{ |c| c[:id] == article.category_id}
-			.article.col-sm-4{value: "#{category.en}"}
-				- if article.photo.nil?
-					=image_tag "no-image.png", class: "article_photo"
-				- else
-					=image_tag get_photo_article_path(article.id), class: "article_photo"
-				%p.title= article.title
-				%p.name= "投稿者: " + @users.find{ |u| u[:id] == article.user_id}.name
-				%p.info= "カテゴリー: " + category.ja
-				- time = article.updated_at.to_s.split(" ")
-				%p.info= "更新時間: " + time[0] + ' ' + time[1]
-				%p.info= "閲覧回数: " + article.access.to_s
+			.article_container.col-sm-12.col-md-4{value: "#{category.en}"}
+				.article
+					.image_sizer
+						- if article.photo.nil?
+							= link_to image_tag("no-image.png", class: "article_photo"), article_path(article.id)
+						- else
+							= link_to image_tag(get_photo_article_path(article.id), class: "article_photo"), article_path(article.id)
+					%p.title
+						%a= link_to article.title, article_path(article.id)
+					%p.name
+						= "投稿者: "
+						= link_to @users.find{ |u| u[:id] == article.user_id}.name, user_path(article.user_id)
+					- time = article.updated_at.to_s.split(" ")
+					= simple_format h("カテゴリー: #{category.ja}\n更新時間: #{time[0]} #{time[1]}\n閲覧回数: #{article.access.to_s}"), class: "info"

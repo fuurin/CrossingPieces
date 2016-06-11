@@ -15,6 +15,8 @@ $ ->
 		return false
 	$('.scroll').click(scroll)
 
+
+
 	# Google Maps
 	options = {zoom: 1, center: new google.maps.LatLng 39, 138}
 	map = new google.maps.Map $('#map')[0], options
@@ -30,7 +32,6 @@ $ ->
 		
 		# 吹き出し生成
 		content = '<a href="universities/' + data.attr('value') + '">' + data.attr('name_en') + '<br/>' + data.attr('name_ja') + '</a>'
-		console.log
 		infoWindows.push(new google.maps.InfoWindow({content: content}))
 
 		#　クリックで吹き出しが出るようにする
@@ -41,14 +42,10 @@ $ ->
 
 
 	# People
-	people = $('.person')
-
-	showNewPeople = () -> 
-		_.each _.shuffle(people).slice(0,3), (person) -> $(person).fadeIn("fast")
-
 	seeOthers = () ->
-		_.each people, (person) -> $(person).fadeOut("fast")
-		setTimeout showNewPeople, 300
+		people = $('.person_container')
+		_.each people, (person) -> $(person).css({"display": "none"})
+		_.each _.shuffle(people).slice(0,3), (person) -> $(person).fadeIn()
 
 	$('#see-others').click(seeOthers)
 	seeOthers()

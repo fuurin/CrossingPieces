@@ -5,3 +5,18 @@ hover {
 		color:	$yellow;
 	}
 }
+
+image_hover_opacity {
+	&:hover {
+		filter:alpha(opacity=80);
+		opacity:0.8;
+	}
+}
+
+image_hover_shadow {
+	&:hover {
+		box-shadow:6px 6px 6px -3px $gray-strong;
+		-moz-box-shadow:6px 6px 6px -3px $gray-strong;
+		-webkit-box-shadow:6px 6px 6px -3px $gray-strong;
+	}
+}

@@ -1,21 +1,73 @@
-%p#notice= notice
+= javascript_include_tag 'show_university'
 
-%p
-  %b User:
-  = @article.user
-%p
-  %b University:
-  = @article.university
-%p
-  %b Title:
-  = @article.title
-%p
-  %b Category:
-  = @article.category
-%p
-  %b Updated at:
-  = @article.updated_at
+%header
+  = link_to image_tag("logo.png", class: "logo"), root_path
 
-= link_to 'Edit', edit_article_path(@article)
-\|
-= link_to 'Back', articles_path
+.main_container
+  %h1= link_to @university.name_ja, university_path(@university.id)
+  %h3= link_to @university.name_en, university_path(@university.id)
+
+  - if @article.photo.nil?
+    = image_tag "no-image.png", class: "show_article_photo"
+  - else
+    = image_tag get_photo_article_path(@article.id), class: "show_article_photo"
+
+  #content_container
+    %h1= @article.title
+    %p.name
+      = "投稿者: "
+      = link_to @author.name, user_path(@author.id)
+    %p.info= "カテゴリー: " + @categoryName
+    - update_time = @article.updated_at.to_s.split(" ")
+    - create_time = @article.created_at.to_s.split(" ")
+    %p.info
+      = "更新時間: " + update_time[0] + ' ' + update_time[1] + " / " + "投稿時間: " + create_time[0] + ' ' + create_time[1]
+    %p.info= "閲覧回数: " + @article.access.to_s
+
+    - @items.each do |item|
+      %h3= item.name
+      %p.content= @contents.find{|c| c.item_id == item.id and c.article_id == @article.id}.content
+
+  %h2　この記事を書いた人
+  #people
+    .row
+      .col-md-4
+      .col-md-4.person_container
+        .person
+          .image_sizer
+            - if @author.photo.nil?
+              =link_to image_tag("no-image.png"), user_path(@author.id)
+            - else
+              =link_to image_tag(get_photo_user_path(@author.id)), user_path(@author.id)
+          %p.name= link_to @author.name, user_path(@author.id)
+          %p.text= @author.comment
+      .col-md-4
+
+  %h2
+    = link_to "同じ大学", university_path(@university.id)
+    の記事
+  %ol.breadcrumb
+    %li
+      %a.select_article(value="")全て
+    - @categories.each do |category|
+      %li
+        %a.select_article{value: "#{category.en}"}
+          = category.ja
+
+  #articles_container
+    - @articles.each do |article|
+      - category = @categories.find{ |c| c[:id] == article.category_id}
+      .article_container.col-sm-12.col-md-4{value: "#{category.en}"}
+        .article
+          .image_sizer
+            - if article.photo.nil?
+              = link_to image_tag("no-image.png", class: "article_photo"), article_path(article.id)
+            - else
+              = link_to image_tag(get_photo_article_path(article.id), class: "article_photo"), article_path(article.id)
+          %p.title
+            %a= link_to article.title, article_path(article.id)
+          %p.name
+            = "投稿者: "
+            = link_to @users.find{ |u| u[:id] == article.user_id}.name, user_path(article.user_id)
+          - time = article.updated_at.to_s.split(" ")
+          = simple_format h("カテゴリー: #{category.ja}\n更新時間: #{time[0]} #{time[1]}\n閲覧回数: #{article.access.to_s}"), class: "info"
