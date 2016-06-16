@@ -5,6 +5,7 @@ class UniversitiesController < ApplicationController
 	def show
 		@categories = Category.all
 		@users = User.all
+		@universities = University.all
 		@university = University.find(params[:id]) || return
 		@photosNum = get_photo_num @university.id
 		@articles = Article.where("university_id = ?", @university.id).order("id DESC")
@@ -39,14 +40,8 @@ class UniversitiesController < ApplicationController
 	end
 
 	def get_photo
-		num = params[:num].to_i
-		p = UniversityPhoto.where("university_id = ?", params[:id])[num]
-		unless p.nil?
-		  send_data(p[:photo], :type => p[:content_type], :disposition => "inline")
-		else
-			path = image_path("no-image.png")
-			send_data(path, :type => "image/png", :disposition => "inline")
-		end
+		p = UniversityPhoto.where("university_id = ?", params[:id])[params[:num].to_i]
+		send_data(p[:photo], :type => p[:content_type], :disposition => "inline")
   end
 
 	private

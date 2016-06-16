@@ -1,4 +1,4 @@
-= javascript_include_tag 'show_university'
+= javascript_include_tag 'show_article'
 
 %header
   = link_to image_tag("logo.png", class: "logo"), root_path
@@ -26,7 +26,8 @@
 
     - @items.each do |item|
       %h3= item.name
-      %p.content= @contents.find{|c| c.item_id == item.id and c.article_id == @article.id}.content
+      .content
+        = simple_format(linebreak_to_br(@contents.find{|c| c.item_id == item.id and c.article_id == @article.id}.content))
 
   %h2　この記事を書いた人
   #people

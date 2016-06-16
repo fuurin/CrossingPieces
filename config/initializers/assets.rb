@@ -10,4 +10,6 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += %w( university.js )
 Rails.application.config.assets.precompile += %w( top.js )
+Rails.application.config.assets.precompile += %w( show_user.js )
+Rails.application.config.assets.precompile += %w( show_article.js )
 Rails.application.config.assets.precompile += %w( show_university.js )

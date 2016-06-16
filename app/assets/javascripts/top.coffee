@@ -39,22 +39,24 @@ $ ->
 			openedWindow.close() if openedWindow
 			openedWindow = infoWindows[index]
 			openedWindow.open map, markers[index]
-			
+
+			displayImage = (image) ->
+				link = $("<a></a>", {href: "/universities/" + data.attr('value')})
+				link.append(image)
+				data.children(".baloon").children(".image_sizer").empty().append(link)
+
+			displayImage($('.loading').clone('true'))
+
 			xhr = new XMLHttpRequest()
 			xhr.responseType = "blob"
 			xhr.open("GET", "/universities/" + data.attr('value') + "/get_photo?num=0")
 			xhr.onload = () ->
-				if this.status == 200
-					imgURL = URL.createObjectURL(this.response)
-					image = new Image()
-					image.src = imgURL
-					image.onload = () -> URL.revokeObjectURL(imgURL)
-				else
-					image = $(".no-image").clone(true)
-				
-				link = $("<a></a>", {href: "/universities/" + data.attr('value')})
-				link.append(image)
-				data.children(".baloon").children(".image_sizer").append(link)
+				return displayImage($('.no-image').clone('true')) if this.status != 200
+				imgURL = URL.createObjectURL(this.response)
+				image = new Image()
+				image.src = imgURL
+				image.onload = () -> URL.revokeObjectURL(imgURL)
+				displayImage(image)
 			xhr.send(null)
 
 

@@ -17,14 +17,17 @@
 			.carousel-inner(role="listbox")
 				.item.active
 					.image_sizer
-						= image_tag "no-image.png"
+						= image_tag("loading.gif", class: "loading")
+						= image_tag "no-image.png", onload: "$(this).prev().remove()"
 		
 		- else
+			-# 大学の写真があるとき
 			.carousel-inner(role="listbox")
 				- @photosNum.times do |i|
 					.item{class: "#{i == 0 ? 'active' : ''}"}
 						.image_sizer
-							= image_tag get_photo_university_path({id: @university.id, num: i})
+							= image_tag("loading.gif", class: "loading")
+							= image_tag get_photo_university_path({id: @university.id, num: i}), onload: "$(this).prev().remove()"
 
 		=# Controls
 		%a.left.carousel-control(href="#carousel-example-generic" role="button" data-slide="prev")
@@ -34,6 +37,19 @@
 			%span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
 			%span.sr-only Next
 
+	%h2 大学の場所
+	#map(lat='#{@university.lat.to_s}' lng='#{@university.lng.to_s}' zoom='#{@university.zoom.to_s}')
+
+	.marker_data
+		- @universities.each do |university|
+			.marker_datum(value='#{university.id}' lat='#{university.lat.to_s}' lng='#{university.lng.to_s}' name_en='#{university.name_en}' name_ja='#{university.name_ja}')
+				.baloon
+					.image_sizer
+					%p= link_to simple_format(h(university.name_ja + "\n" + university.name_en)), university_path(university.id)
+		= image_tag("loading.gif", class: "loading")
+		= image_tag("no-image.png", class: "no-image")
+
+	%h2 大学の記事
 	%ol.breadcrumb
 		%li
 			%a.select_article(value="")全て

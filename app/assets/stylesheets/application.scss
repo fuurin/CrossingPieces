@@ -266,6 +266,7 @@ $person_width: 180px;
 
 #articles_container {
 	width: 95%;
+	min-height: 400px;
 	margin: 0 auto 20px;
 		
 	.article_container {
@@ -325,6 +326,7 @@ $person_width: 180px;
 
 .show_photo {
 	margin: 30px auto;
+	min-width: 60%;
 }
 
 .main_container {
