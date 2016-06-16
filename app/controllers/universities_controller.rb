@@ -6,7 +6,7 @@ class UniversitiesController < ApplicationController
 		@categories = Category.all
 		@users = User.all
 		@university = University.find(params[:id]) || return
-		@photosNum = UniversityPhoto.where("university_id = ?", @university.id).length
+		@photosNum = get_photo_num @university.id
 		@articles = Article.where("university_id = ?", @university.id).order("id DESC")
 	end
 
@@ -34,10 +34,19 @@ class UniversitiesController < ApplicationController
 	def destroy # Destroy all pictures at the same time
 	end
 
+	def get_photo_num id
+		UniversityPhoto.where("university_id = ?", id).length
+	end
+
 	def get_photo
 		num = params[:num].to_i
 		p = UniversityPhoto.where("university_id = ?", params[:id])[num]
-  	send_data(p[:photo], :type => p[:content_type], :disposition => "inline")
+		unless p.nil?
+		  send_data(p[:photo], :type => p[:content_type], :disposition => "inline")
+		else
+			path = image_path("no-image.png")
+			send_data(path, :type => "image/png", :disposition => "inline")
+		end
   end
 
 	private

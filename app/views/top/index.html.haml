@@ -13,9 +13,18 @@
 	%h2 留学情報を見つけよう
 	#map
 
-	#marker-data
+	.marker_data
 		- @universities.each do |university|
-			%span.marker-datum(value='#{university.id}' lat='#{university.lat.to_s}' lng='#{university.lng.to_s}' name_en='#{university.name_en}' name_ja='#{university.name_ja}')
+			.marker_datum(value='#{university.id}' lat='#{university.lat.to_s}' lng='#{university.lng.to_s}' name_en='#{university.name_en}' name_ja='#{university.name_ja}')
+				.baloon
+					.image_sizer
+						-# photo = get_photo_university_path(university.id, 0)
+						-# if photo.nil?
+							=#link_to image_tag("no-image.png"), university_path(university.id)
+						-# else
+							=# link_to image_tag(photo), university_path(university.id)
+					%p= link_to simple_format(h(university.name_ja + "\n" + university.name_en)), university_path(university.id)
+			= image_tag("no-image.png", class: "no-image")
 
 	#about_container
 		#about

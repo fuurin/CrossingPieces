@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :universities, :controller => 'universities' do
-    member { get :get_photo }
+    member { get :get_photo, :get_photo_num }
   end
 
   resources :articles, :controller => 'articles' do

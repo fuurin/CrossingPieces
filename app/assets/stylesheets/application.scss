@@ -129,16 +129,21 @@ footer {
 	}
 }
 
-#input-map {
-	width: 80%;
-	height: 380px;
-	margin: 20px auto;
+#map {
+	width: 100%;
+	height: 600px;
 }
 
-#map {
-	width: 80%;
-	height: 380px;
-	margin: 0 auto;
+.marker_data {
+	display: none;
+}
+.marker_datum {
+	.baloon {
+		@include image_sizer(50%, 100%);
+		img {
+			@extend image_hover_shadow;
+		}
+	}
 }
 
 #about_container {

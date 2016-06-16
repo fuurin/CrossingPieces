@@ -4,6 +4,7 @@
 
 markers = []
 infoWindows = []
+openedWindow = null
 
 $ ->
 	# Scroll
@@ -18,12 +19,12 @@ $ ->
 
 
 	# Google Maps
-	options = {zoom: 1, center: new google.maps.LatLng 39, 138}
+	options = {zoom: 2, center: new google.maps.LatLng 39, 138}
 	map = new google.maps.Map $('#map')[0], options
 
 	# Google Mapsにマーカーセット
-	_.each $('.marker-datum'), (markerDatum, index) ->
-		data = $ markerDatum
+	_.each $('.marker_datum'), (markerDatum, index) ->
+		data = $(markerDatum)
 
 		# マーカー生成
 		place = new google.maps.LatLng data.attr('lat'), data.attr('lng') 
@@ -31,13 +32,30 @@ $ ->
 		markers.push marker
 		
 		# 吹き出し生成
-		content = '<a href="universities/' + data.attr('value') + '">' + data.attr('name_en') + '<br/>' + data.attr('name_ja') + '</a>'
-		infoWindows.push(new google.maps.InfoWindow({content: content}))
+		infoWindows.push(new google.maps.InfoWindow({content: markerDatum}))
 
 		#　クリックで吹き出しが出るようにする
 		marker.addListener 'click', ->
-			_.each infoWindows, (info) -> info.close() 
-			infoWindows[index].open map, markers[index]
+			openedWindow.close() if openedWindow
+			openedWindow = infoWindows[index]
+			openedWindow.open map, markers[index]
+			
+			xhr = new XMLHttpRequest()
+			xhr.responseType = "blob"
+			xhr.open("GET", "/universities/" + data.attr('value') + "/get_photo?num=0")
+			xhr.onload = () ->
+				if this.status == 200
+					imgURL = URL.createObjectURL(this.response)
+					image = new Image()
+					image.src = imgURL
+					image.onload = () -> URL.revokeObjectURL(imgURL)
+				else
+					image = $(".no-image").clone(true)
+				
+				link = $("<a></a>", {href: "/universities/" + data.attr('value')})
+				link.append(image)
+				data.children(".baloon").children(".image_sizer").append(link)
+			xhr.send(null)
 
 
 

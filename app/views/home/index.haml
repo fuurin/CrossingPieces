@@ -7,9 +7,13 @@
 		.alert.alert-info.fade.in
 			%button.close(data-dismiss="alert" aria-label="close")
 				&times;
-			-# このstrong部分にshowへのリンク埋めたい
-			%strong= flash[:notice]["subject"]
-			= flash[:notice]["action"]
+			- if flash[:notice]["action"].present?
+				-# このstrong部分にshowへのリンク埋めたい
+				%strong= flash[:notice]["subject"]
+				= flash[:notice]["action"]
+			- else
+				%p= flash[:notice] if flash[:notice].present?
+				%p= flash[:alert] if flash[:alert].present?
 
 	%h3
 		= t "home.welcome"
