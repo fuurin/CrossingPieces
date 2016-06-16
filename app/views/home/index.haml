@@ -1,6 +1,8 @@
+= javascript_include_tag 'home_index'
+
 = render "devise/shared/header"
 
-.members_container
+.main_container
 	%h1= t "page_title.user_home"
 
 	- if flash[:notice].present?
@@ -29,8 +31,34 @@
 		%table
 			%tr
 				%td= button_to t("home.author_info"), home_index_path
-				%td= button_to t("home.add_univ"), new_university_path, method: :get
+				%td= button_to t("home.new_article"), new_article_path, method: :get
 
 			%tr
-				%td= button_to t("home.new_article"), new_article_path, method: :get
-				%td= button_to t("home.list_article"), home_index_path
+				%td= button_to t("home.add_univ"), new_university_path, method: :get
+				%td= button_to t("home.list_university"), home_index_path
+
+	-# 以下日本語未対応
+
+	%h2 あなたの記事
+	%ol.breadcrumb
+		%li
+			%a.select_article(value="")全て
+		- @categories.each do |category|
+			%li
+				%a.select_article{value: "#{category.en}"}
+					= category.ja
+
+	#articles_container
+		- @articles.each do |article|
+			- category = @categories.find{ |c| c[:id] == article.category_id}
+			.article_container.col-sm-12.col-md-4{value: "#{category.en}"}
+				.article
+					.image_sizer
+						- if article.photo.nil?
+							= link_to image_tag("no-image.png", class: "article_photo"), edit_article_path(article.id)
+						- else
+							= link_to image_tag(get_photo_article_path(article.id), class: "article_photo"), edit_article_path(article.id)
+					%p.title
+						%a= link_to article.title, edit_article_path(article.id)
+					- time = article.updated_at.to_s.split(" ")
+					= simple_format h("カテゴリー: #{category.ja}\n更新時間: #{time[0]} #{time[1]}\n閲覧回数: #{article.access.to_s}"), class: "info"

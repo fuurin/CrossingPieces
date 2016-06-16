@@ -219,7 +219,7 @@ ja:
     author_info: 投稿者情報編集
     add_univ: 大学を追加
     new_article: 新規記事作成
-    list_article: 記事の編集・削除
+    list_university: 大学の一覧
     add_complete: を追加しました
     photo_failed: の保存に失敗しました。ファイルを確認してください。
   user:
@@ -243,7 +243,8 @@ ja:
     university_blank: 大学を選択(英語表記、アルファベット順)
     university_not_found: 大学が見つからない?
     item_mandatory: は必須項目です。
-    post: を投稿しました。
+    post: の記事を投稿しました。
+    update: の記事を更新しました。
   form:
     mandatory: (必須)
     new_registration: 新規登録

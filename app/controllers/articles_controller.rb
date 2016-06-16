@@ -23,6 +23,11 @@ class ArticlesController < ApplicationController
 	end
 
 	def edit
+		@article = Article.find(params[:id]) || return
+		@universities = University.all
+		@category = Category.find(@article.category_id)
+		@contents = Content.where("article_id = ?", @article.id)
+		@items = Item.where("category_id = ?", @article.category_id).order("'order'")
 	end
 
 	def create
@@ -39,14 +44,14 @@ class ArticlesController < ApplicationController
 	end
 
 	def update
-		respond_to do |format|
-			if @article.update(article_params)
-				format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-				format.json { render :show, status: :ok, location: @article }
-			else
-				format.html { render :edit }
-				format.json { render json: @article.errors, status: :unprocessable_entity }
-			end
+		@article = Article.find(params[:id]) || return
+		if @article.update(article_params) and invalid_contents.empty?
+			Content.import contents
+			flash[:notice] = {subject: @article.title, action: t("article.update")}
+			redirect_to home_index_path
+		else
+			flash[:error] = invalid_contents
+			render 'edit'
 		end
 	end
 
@@ -115,6 +120,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def add_access article
+		article.record_timestamps = false
 		article.access += 1
 		article.save
 	end
