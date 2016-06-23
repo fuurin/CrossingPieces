@@ -1,12 +1,11 @@
 class ArticlesController < ApplicationController
-	before_action :authenticate_user!, only: [:new, :create, :update]
+	before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
-	before_action :find_user_university, only: [:new, :create, :update]
+	before_action :find_user_university, only: [:new, :create]
 	before_action :ready_to_post, only: [:new, :create, :update]
 
 	def show
 		@users = User.all
-		@article = Article.find(params[:id]) || return
 		@author = @users.find{ |u| u[:id] == @article.user_id}
 		@categories = Category.all
 		@categoryName = Category.find(@article.category_id).ja
@@ -23,7 +22,6 @@ class ArticlesController < ApplicationController
 	end
 
 	def edit
-		@article = Article.find(params[:id]) || return
 		@universities = University.all
 		@category = Category.find(@article.category_id)
 		@contents = Content.where("article_id = ?", @article.id)
@@ -44,7 +42,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def update
-		@article = Article.find(params[:id]) || return
+		reset_access @article if params[:article][:reset_access] == "1"
 		if @article.update(article_params) and invalid_contents.empty?
 			Content.import contents
 			flash[:notice] = {subject: @article.title, action: t("article.update")}
@@ -56,11 +54,10 @@ class ArticlesController < ApplicationController
 	end
 
 	def destroy
+		flash[:notice] = {subject: @article.title, action: t("article.delete")}
+		Content.delete_all(article_id: @article.id)
 		@article.destroy
-		respond_to do |format|
-			format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
-			format.json { head :no_content }
-		end
+		redirect_to home_index_path
 	end
 
 	def get_photo
@@ -123,5 +120,11 @@ class ArticlesController < ApplicationController
 		article.record_timestamps = false
 		article.access += 1
 		article.save
+	end
+
+	def reset_access article
+		article.record_timestamps = false
+		article.access = 0
+		article.save	
 	end
 end

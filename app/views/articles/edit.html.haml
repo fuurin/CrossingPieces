@@ -55,4 +55,19 @@
 					%p 何も選択しなければ更新されません。
 					= a.file_field 'photo', {"accept" => "image/*"}
 
+			%label
+				%tr
+					%th 閲覧回数をリセット
+					%td
+						%label
+							= a.check_box 'reset_access', {:checked => false}
+							= "(閲覧回数: #{@article.access} 回)"
+
 		.actions= a.submit t("helpers.submit.update")
+
+		%hr
+
+		.actions= link_to t("helpers.submit.delete"), article_path(@article.id), method: :delete, data:{confirm: "本当にこの記事を削除しますか?"}
+
+		%br
+		%br

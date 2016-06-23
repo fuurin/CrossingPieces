@@ -143,6 +143,7 @@ ja:
       login:  ログイン
       submit: 保存する
       update: 更新する
+      delete: 削除する
       post: 投稿する
   number:
     currency:
@@ -245,6 +246,7 @@ ja:
     item_mandatory: は必須項目です。
     post: の記事を投稿しました。
     update: の記事を更新しました。
+    delete: の記事を削除しました。
   form:
     mandatory: (必須)
     new_registration: 新規登録
