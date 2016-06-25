@@ -13,8 +13,15 @@ class Users::UsersController < ApplicationController
   end
 
   def destroy
-  	@user.destroy
-  	redirect_to root_path
+    flash[:notice] = t("user.delete", name: @user.name)
+    
+    Article.where("user_id = ?", @user.id).each do |article|
+      Content.delete_all(article_id: article.id)
+      article.destroy
+  	end
+
+    @user.destroy
+  	redirect_to new_user_session_path
   end
 
   def get_photo

@@ -1,31 +1,94 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
-  .field
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .field
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password, autocomplete: "off"
-  .actions
-    = f.submit "Update"
-%h3 Cancel my account
-%p
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
-= link_to "Back", :back
+= render "devise/shared/header"
+
+.main_container
+	%h1= t "page_title.user_update"
+
+	= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+		= devise_error_messages!
+
+		%table
+			%tr
+				.field.form-inline
+					%th
+						= f.label :email
+						.mandatory= t "form.mandatory"
+					%td= f.email_field :email, autofocus: true, required: true, placeholder: t("user.p_email")
+
+			%tr
+				.field
+					%th
+						= f.label :public_email
+					%td= f.check_box :public_email, {:checked => @user.public_email}
+
+			%tr
+				.field
+					%th
+						= f.label :password
+
+						%div
+							- if @minimum_password_length
+								(#{@minimum_password_length}
+								= f.label :minimum_password_length
+								)
+
+					%td= f.password_field :password, autocomplete: "off", placeholder: t("user.p_edit_password")
+
+			%tr
+				.field
+					%th
+						= f.label :password_confirmation
+					%td= f.password_field :password_confirmation, autocomplete: "off", placeholder: t("user.p_password_confirmation")
+
+			%tr
+				.field
+					%th
+						= f.label :name
+						.mandatory= t "form.mandatory"
+						%br
+						= f.label :name_public
+					%td= f.text_field :name, required: true, placeholder: t("user.p_name")
+
+			%tr
+				.field
+					%th
+						= f.label :comment
+						.mandatory= t "form.mandatory"
+					%td= f.text_area :comment, required: true, placeholder: t("user.p_comment")
+
+			%tr
+				.field
+					%th
+						= f.label :country_region
+						.mandatory= t "form.mandatory"
+					%td= f.text_field :country_region, required: true, placeholder: t("user.p_country_region")
+
+			%tr
+				%th
+					= f.label :university
+					.mandatory= t "form.mandatory"
+				%td
+					= f.collection_select(:university_id, @universities, :id, :name_en, {:include_blank => t("user.university_blank"), :selected => @user["university_id"]})
+					%br= link_to t("article.university_not_found"), new_university_path
+
+			%tr
+				.field
+					%th= f.label :photo
+					%td
+						%p= t("user.won't_change_photo")
+						= f.file_field("photo", {"accept" => "image/*"})
+
+			%tr
+				.field
+					%th
+						= f.label t("activerecord.attributes.user.current_password")
+						.mandatory= t "form.mandatory"
+					%td
+						= f.password_field :current_password, required: true, autocomplete: "off", placeholder: t("user.p_current_password")
+
+		.actions
+			= f.submit t("helpers.submit.update")
+			= link_to t("helpers.home"), home_index_path(@user.id)
+
+		%hr
+
+		.actions= link_to t("helpers.submit.user_delete"), user_path(@user.id), method: :delete, data:{confirm: "本当に投稿者情報を削除しますか？ 投稿者の記事情報もすべて削除され、元に戻すことはできません。"}

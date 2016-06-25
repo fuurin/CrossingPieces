@@ -2,7 +2,7 @@
 
 = javascript_include_tag 'university'
 
-.members_container
+.main_container
 	%h1= t "page_title.add_univ"
 
 	- if @university.errors.any? or @invalid_photos.present?
@@ -47,7 +47,9 @@
 			- @photos_num.times do |n|
 				%tr
 					%th
-						= u.label t("university.photo", num: (n+1).to_s)
+						- #なぜかlocaleだとMBが小文字になる
+						5MBまで
+						= u.label t("university.photo_num", num: (n+1).to_s)
 					%td= u.file_field "photos[#{n.to_s}]", {"accept" => "image/*"}
 
 		= u.label :input_map

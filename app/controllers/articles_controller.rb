@@ -72,8 +72,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def find_user_university
-		return @user_university = nil if current_user.university_id.nil?
-		@user_university = University.find(current_user.university_id).name_en
+		@user_university = current_user.university_id
 	end
 
 	def ready_to_post

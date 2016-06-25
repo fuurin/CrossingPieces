@@ -30,7 +30,7 @@
 	.home
 		%table
 			%tr
-				%td= button_to t("home.author_info"), home_index_path
+				%td= button_to t("home.user_update"), edit_user_registration_path, method: :get
 				%td= button_to t("home.new_article"), new_article_path, method: :get
 
 			%tr

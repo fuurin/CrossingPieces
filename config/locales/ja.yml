@@ -138,12 +138,14 @@ ja:
   helpers:
     select:
       prompt: 選択してください
+    home: ホームへ
     submit:
       create: 登録する
       login:  ログイン
       submit: 保存する
       update: 更新する
       delete: 削除する
+      user_delete: 投稿者情報全削除
       post: 投稿する
   number:
     currency:
@@ -207,8 +209,9 @@ ja:
     login: 投稿者ログイン
     user_home: 投稿者ホーム
     user_sign_up: 投稿者新規登録
+    user_update: 投稿者情報編集
     user_datum_sign_up: 投稿者データ登録
-    pasword_reset: パスワード再設定
+    password_reset: パスワード再設定
     add_univ: 新規大学登録
     add_article: 新規記事投稿
   authentication:
@@ -217,7 +220,7 @@ ja:
   home:
     welcome: ようこそ！
     san: さん
-    author_info: 投稿者情報編集
+    user_update: 投稿者情報編集
     add_univ: 大学を追加
     new_article: 新規記事作成
     list_university: 大学の一覧
@@ -226,10 +229,15 @@ ja:
   user:
     p_email: ex. example@ryugaku.com
     p_password: ログインのためのパスワードを入力
+    p_edit_password: パスワード変更の必要がなければ空欄のままにして下さい
     p_password_confirmation: 同じパスワードを入力
+    p_current_password: 更新のために、現在のパスワードを入力してください。
     p_name: ex. 留学太郎
     p_comment: ex. 留学太郎です！よろしくお願いします！
     p_country_region: ex. アメリカ/シリコンバレー
+    won't_change_photo: 何も選択しなければ更新されません。
+    university_blank: 留学先大学を選択(英語表記、アルファベット順)
+    delete: 投稿者 (%{name}) さんの情報を全て削除しました。
   university:
     p_name_ja: ex. 第1ジャパン大学
     e_name_ja: 漢字、ひらがな、カタカナなどの全角文字を含まないでください。
@@ -238,7 +246,8 @@ ja:
     p_recommended_point: ex. アットホームで熱意あふれる校風
     p_comment: ex. 誰もが自分の夢に向かって努力を続けています。学生がフレンドリーで、過ごしやすい学校です。あなたもこの学校で、未来への扉を開いてみませんか？
     add: を追加しました。
-    photo: 写真(2MBまで)(%{num}枚目)
+    photo: 写真(5MBまで)
+    photo_num: (%{num}枚目)
   article:
     p_title: ex. 私の留学体験記 -1-
     university_blank: 大学を選択(英語表記、アルファベット順)
@@ -260,13 +269,16 @@ ja:
         password: パスワード
         comment: 自己紹介
         country_region: 留学した国・地域
-        photo: アイコン画像(2MBまで)
+        university: 留学先の大学
+        photo: アイコン画像(5MBまで)
         photo_content_type: JPEG,PNG,GIFのいずれかでない画像の形式
         minimum_password_length: 文字以上
         password_confirmation: パスワード確認
         email: メールアドレス
+        public_email: メールアドレスを公開する
         remember_me: メールアドレス・パスワードを保存する
         forgot_password?: パスワードを忘れた?
+        current_password: 現在のパスワード
       university:
         name_ja: 大学名(日本語)
         name_en: 大学名(英語)
@@ -281,5 +293,5 @@ ja:
       article:
         title: タイトル
         university: 大学
-        photo: 写真(2MBまで)
+        photo: 写真(5MBまで)
   site_title: RyugakuHub

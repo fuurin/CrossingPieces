@@ -1,6 +1,6 @@
 = render "devise/shared/header"
 
-.members_container
+.main_container
 	%h1= @article.title
 	%h3
 		カテゴリー： 
@@ -67,7 +67,7 @@
 
 		%hr
 
-		.actions= link_to t("helpers.submit.delete"), article_path(@article.id), method: :delete, data:{confirm: "本当にこの記事を削除しますか?"}
+		.actions= link_to t("helpers.submit.delete"), article_path(@article.id), method: :delete, data:{confirm: "本当にこの記事を削除しますか? 削除してしまうと、記事を元に戻すことはできません。"}
 
 		%br
 		%br

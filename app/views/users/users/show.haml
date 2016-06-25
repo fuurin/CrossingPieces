@@ -17,8 +17,7 @@
     %h3 留学先
     %p.content= @user.country_region
     %h3 コンタクト
-    -# 連絡先非公開機能を追加したい
-    %p.content= false ? @user.email : "公開されていません"
+    %p.content= @user.public_email ? @user.email : "公開されていません"
 
   %h2　この人が書いた記事
   %ol.breadcrumb

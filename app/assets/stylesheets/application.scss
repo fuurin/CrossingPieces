@@ -336,16 +336,6 @@ $person_width: 180px;
 	width: 80%;
 	margin-top: $header_height + $vertical_margin;
 	margin-bottom: 80px;
-}
-
-.members_container {
-	$vertical_margin: 30px;
-	@extend .container;
-	@extend .text-center;
-	width: 80%;
-	margin-top: $header_height + $vertical_margin;
-	margin-bottom: $vertical_margin;
-	border-style: dashed;
 
 	.mandatory {
 		display: inline;

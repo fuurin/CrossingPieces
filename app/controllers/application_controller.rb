@@ -5,8 +5,10 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
  
   def configure_permitted_parameters
-  	permit_params = [:name, :comment, :country_region, :university_id, :photo, :photo_content_type]
+  	permit_params = [:public_email, :name, :comment, :country_region, 
+      :university_id, :photo, :photo_content_type]
     devise_parameter_sanitizer.for(:sign_up) << permit_params
+    devise_parameter_sanitizer.for(:account_update) << permit_params
   end
 
   def after_sign_out_path_for resource
