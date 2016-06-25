@@ -20,6 +20,8 @@ class UniversitiesController < ApplicationController
 	end
 
 	def edit
+		@university = University.find(params[:id]) || return
+		@photosNum = get_photo_num @university.id
 	end
 
 	def create
