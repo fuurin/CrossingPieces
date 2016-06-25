@@ -8,6 +8,10 @@ class HomeController < ApplicationController
   	end
   end
 
+  def universities
+    @universities = University.all.order("name_en DESC")
+  end
+
   def authentication
   end
 end

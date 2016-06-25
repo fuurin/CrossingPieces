@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get 'home/authentication'
 
+  post 'home/universities'
+
   devise_for :users, :controllers => {
     :registrations => 'users/registrations'
   }

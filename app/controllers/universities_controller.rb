@@ -1,5 +1,5 @@
 class UniversitiesController < ApplicationController
-	before_action :authenticate_user!, only: [:new, :edit, :create, :update]
+	before_action :authenticate_user!, only: [:list, :new, :edit, :create, :update]
 	before_action :set_photos_num, only: [:new, :edit, :create, :update]
 
 	def show
@@ -9,6 +9,10 @@ class UniversitiesController < ApplicationController
 		@university = University.find(params[:id]) || return
 		@photosNum = get_photo_num @university.id
 		@articles = Article.where("university_id = ?", @university.id).order("id DESC")
+	end
+
+	def list
+		@universities = University.all.order("name_en DESC")
 	end
 
 	def new
