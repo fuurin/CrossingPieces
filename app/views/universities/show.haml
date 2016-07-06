@@ -64,12 +64,15 @@
 			.article_container.col-sm-12.col-md-4{value: "#{category.en}"}
 				.article
 					.image_sizer
+						= image_tag("loading.gif", class: "loading")
 						- if article.photo.nil?
 							= link_to image_tag("no-image.png", class: "article_photo"), article_path(article.id)
 						- else
-							= link_to image_tag(get_photo_article_path(article.id), class: "article_photo"), article_path(article.id)
+							= link_to image_tag(get_photo_article_path(article.id), class: "article_photo", onload: "$(this).parent().parent().children('.loading').remove()"), article_path(article.id)
 					%p.title
-						%a= link_to article.title, article_path(article.id)
+						- strlen = has_mb?(article.title) ? 20 : 40
+						- title = truncate(article.title, length: strlen)
+						%a= link_to title, article_path(article.id)
 					%p.name
 						= "投稿者: "
 						= link_to @users.find{ |u| u[:id] == article.user_id}.name, user_path(article.user_id)
