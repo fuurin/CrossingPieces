@@ -187,6 +187,7 @@ td,
 th {
   padding: 0;
 }
+
 @media print {
   * {
     color: #000 !important;
@@ -909,6 +910,15 @@ textarea {
   font-size: inherit;
   line-height: inherit;
 }
+
+input[type="text"],
+input[type="email"],
+input[type="file"],
+select,
+textarea {
+  color: #000;
+}
+
 a {
   color: #428bca;
   text-decoration: none;
