@@ -4,6 +4,7 @@
   = link_to image_tag("logo.png", class: "logo"), root_path
 
 .main_container
+  #fb-root
   %h1= link_to @university.name_ja, university_path(@university.id)
   %h3= link_to @university.name_en, university_path(@university.id)
 
@@ -14,6 +15,8 @@
 
   #content_container
     %h1= @article.title
+    %p
+      .fb-like(data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true")
     %p.name
       = "投稿者: "
       = link_to @author.name, user_path(@author.id)
