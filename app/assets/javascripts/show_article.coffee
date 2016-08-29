@@ -7,14 +7,15 @@ $ ->
 			$(article).fadeIn() if !category or $(article).attr("value") == category
 	)
 
-	d = document
-	s = 'script'
-	id = 'jacebook-jssdk'
+d = document
+s = 'script'
+id = 'jacebook-jssdk'
 
-	do (d, s, id) ->
-		js, fjs = d.getElementsByTagName(s)[0]
-		if (d.getElementById(id)) return
-		js = d.createElement(s)
-		js.id = id
-		js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.7"
-		fjs.parentNode.insertBefore(js, fjs)
+do (d, s, id) ->
+	if d.getElementById(id)
+		return
+	fjs = d.getElementsByTagName(s)[0]
+	js = d.createElement(s)
+	js.id = id
+	js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.7"
+	fjs.parentNode.insertBefore(js, fjs)
